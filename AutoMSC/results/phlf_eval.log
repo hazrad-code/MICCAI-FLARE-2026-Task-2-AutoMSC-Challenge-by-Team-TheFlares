@@ -1,0 +1,28 @@
+============================================================
+AutoMSC Evaluation
+============================================================
+
+--- Segmentation Metrics ---
+  Label 1: DSC = 0.9640 +/- 0.0264 | NSD = 0.7758 +/- 0.1393
+  Label 2: DSC = 0.7551 +/- 0.2824 | NSD = 0.5475 +/- 0.2660
+  Label 3: DSC = 0.9070 +/- 0.1594 | NSD = 0.6925 +/- 0.1946
+  Label 4: DSC = 0.8515 +/- 0.1333 | NSD = 0.4921 +/- 0.1387
+  Overall:  DSC = 0.8694 +/- 0.1902 | NSD = 0.6270 +/- 0.2209
+
+--- Classification Metrics ---
+  Accuracy:    0.9688
+  AUC:         0.9667
+  AUPRC:       0.5833
+  Sensitivity: 1.0000
+  Specificity: 0.9667
+  Precision:   0.6667
+  Recall:      1.0000
+  F1:          0.8000
+
+  Confusion Matrix:
+[[29  1]
+ [ 0  2]]
+
+  Classification metrics saved to /home/jovyan/valeval/phlf_val_metrics_cls.csv
+
+============================================================

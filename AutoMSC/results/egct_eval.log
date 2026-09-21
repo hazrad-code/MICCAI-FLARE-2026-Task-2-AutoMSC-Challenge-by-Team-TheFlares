@@ -1,0 +1,30 @@
+============================================================
+AutoMSC Evaluation
+============================================================
+
+--- Segmentation Metrics ---
+  Label 1: DSC = 0.8495 +/- 0.1684 | NSD = 0.6875 +/- 0.1912
+  Overall:  DSC = 0.8495 +/- 0.1684 | NSD = 0.6875 +/- 0.1912
+
+--- Classification Metrics ---
+  Accuracy:          0.6893
+  Balanced Accuracy: 0.4718
+  Weighted AUC:      0.8522
+  Weighted AUPRC:    0.8391
+  Weighted F1:       0.6257
+  Weighted Precision:0.7377
+  Weighted Recall:   0.6893
+
+  Per-class metrics:
+    Class 0: Precision=0.6923, Recall=0.9403, F1=0.7975, AUC=0.8420, AUPRC=0.9065
+    Class 1: Precision=0.6000, Recall=0.3750, F1=0.4615, AUC=0.8484, AUPRC=0.6158
+    Class 2: Precision=1.0000, Recall=0.1000, F1=0.1818, AUC=0.8895, AUPRC=0.7922
+
+  Confusion Matrix:
+[[63  4  0]
+ [10  6  0]
+ [18  0  2]]
+
+  Classification metrics saved to /home/jovyan/valeval/egct_val_metrics_cls.csv
+
+============================================================

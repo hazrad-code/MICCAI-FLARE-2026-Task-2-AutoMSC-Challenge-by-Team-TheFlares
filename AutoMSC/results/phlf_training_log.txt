@@ -1,0 +1,2399 @@
+
+#######################################################################
+Please cite the following paper when using nnU-Net:
+Isensee, F., Jaeger, P. F., Kohl, S. A., Petersen, J., & Maier-Hein, K. H. (2021). nnU-Net: a self-configuring method for deep learning-based biomedical image segmentation. Nature methods, 18(2), 203-211.
+#######################################################################
+ 
+2026-09-05 04:34:47.315898: Using torch.compile... 
+2026-09-05 04:34:47.924436: do_dummy_2d_data_aug: True 
+2026-09-05 04:34:47.924861: Using splits from existing split file: /home/jovyan/flare/nnUNet_preprocessed/Dataset009_PHLF/splits_final.json 
+2026-09-05 04:34:47.925000: The split file contains 5 splits. 
+2026-09-05 04:34:47.925049: Desired fold for training: 0 
+2026-09-05 04:34:47.925086: This split has 127 training and 32 validation cases. 
+2026-09-05 04:34:47.937148: Imbalanced classes detected. Using Focal Loss. 
+
+This is the configuration used by this training:
+Configuration name: 3d_fullres
+ {'data_identifier': 'nnUNetPlans_3d_fullres', 'preprocessor_name': 'DefaultPreprocessor', 'batch_size': 2, 'patch_size': [48, 160, 256], 'median_image_size_in_voxels': [64.0, 250.0, 351.0], 'spacing': [3.0, 1.1363636255264282, 1.1363636255264282], 'normalization_schemes': ['ZScoreNormalization'], 'use_mask_for_norm': [False], 'resampling_fn_data': 'resample_data_or_seg_to_shape', 'resampling_fn_seg': 'resample_data_or_seg_to_shape', 'resampling_fn_data_kwargs': {'is_seg': False, 'order': 3, 'order_z': 0, 'force_separate_z': None}, 'resampling_fn_seg_kwargs': {'is_seg': True, 'order': 1, 'order_z': 0, 'force_separate_z': None}, 'resampling_fn_probabilities': 'resample_data_or_seg_to_shape', 'resampling_fn_probabilities_kwargs': {'is_seg': False, 'order': 1, 'order_z': 0, 'force_separate_z': None}, 'architecture': {'network_class_name': 'dynamic_network_architectures.architectures.unet.PlainConvUNet', 'arch_kwargs': {'n_stages': 6, 'features_per_stage': [32, 64, 128, 256, 320, 320], 'conv_op': 'torch.nn.modules.conv.Conv3d', 'kernel_sizes': [[1, 3, 3], [3, 3, 3], [3, 3, 3], [3, 3, 3], [3, 3, 3], [3, 3, 3]], 'strides': [[1, 1, 1], [1, 2, 2], [2, 2, 2], [2, 2, 2], [2, 2, 2], [1, 2, 2]], 'n_conv_per_stage': [2, 2, 2, 2, 2, 2], 'n_conv_per_stage_decoder': [2, 2, 2, 2, 2], 'conv_bias': True, 'norm_op': 'torch.nn.modules.instancenorm.InstanceNorm3d', 'norm_op_kwargs': {'eps': 1e-05, 'affine': True}, 'dropout_op': None, 'dropout_op_kwargs': None, 'nonlin': 'torch.nn.LeakyReLU', 'nonlin_kwargs': {'inplace': True}}, '_kw_requires_import': ['conv_op', 'norm_op', 'dropout_op', 'nonlin']}, 'batch_dice': False} 
+ 
+These are the global plan.json settings:
+ {'dataset_name': 'Dataset009_PHLF', 'plans_name': 'nnUNetPlans', 'original_median_spacing_after_transp': [3.0, 1.1363636255264282, 1.1363636255264282], 'original_median_shape_after_transp': [64, 250, 351], 'image_reader_writer': 'SimpleITKIO', 'transpose_forward': [0, 1, 2], 'transpose_backward': [0, 1, 2], 'experiment_planner_used': 'ExperimentPlanner', 'label_manager': 'LabelManager', 'foreground_intensity_properties_per_channel': {'0': {'max': 3290.33935546875, 'mean': 360.19598388671875, 'median': 337.0, 'min': 0.0, 'percentile_00_5': 56.0, 'percentile_99_5': 1052.0, 'std': 191.21755981445312}}} 
+ 
+2026-09-05 04:34:49.537821: Unable to plot network architecture: nnUNet_compile is enabled! 
+2026-09-05 04:34:49.545261:  
+2026-09-05 04:34:49.545345: Epoch 0 
+2026-09-05 04:34:49.545420: Current learning rate: 0.01 
+2026-09-05 04:37:01.089717: train_loss 0.1435 
+2026-09-05 04:37:01.089895: val_loss 0.087 
+2026-09-05 04:37:01.089969: Pseudo dice [np.float32(0.8258), np.float32(0.0), np.float32(0.0), np.float32(0.0)] 
+2026-09-05 04:37:01.090045: val classification accuracy 0.5 
+2026-09-05 04:37:01.090611: val auc tensor(0.5781) 
+2026-09-05 04:37:01.092811: Epoch time: 131.55 s 
+2026-09-05 04:37:01.092978: Yayy! New best evaluation metric: 0.784600019454956 
+2026-09-05 04:37:01.378078: 
+Task weights: 
+2026-09-05 04:37:01.379614:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 04:37:01.885461:  
+2026-09-05 04:37:01.885567: Epoch 1 
+2026-09-05 04:37:01.885652: Current learning rate: 0.00996 
+2026-09-05 04:38:17.305915: train_loss 0.0243 
+2026-09-05 04:38:17.306134: val_loss -0.0141 
+2026-09-05 04:38:17.306211: Pseudo dice [np.float32(0.863), np.float32(0.0), np.float32(0.5956), np.float32(0.0)] 
+2026-09-05 04:38:17.306279: val classification accuracy 0.5 
+2026-09-05 04:38:17.306451: val auc tensor(0.7871) 
+2026-09-05 04:38:17.307004: Epoch time: 75.42 s 
+2026-09-05 04:38:17.307165: Yayy! New best evaluation metric: 1.0094000101089478 
+2026-09-05 04:38:17.608368: 
+Task weights: 
+2026-09-05 04:38:17.611459:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 04:38:18.201300:  
+2026-09-05 04:38:18.201415: Epoch 2 
+2026-09-05 04:38:18.201498: Current learning rate: 0.00993 
+2026-09-05 04:39:34.639669: train_loss -0.0478 
+2026-09-05 04:39:34.639846: val_loss -0.0557 
+2026-09-05 04:39:34.639920: Pseudo dice [np.float32(0.8578), np.float32(0.0006), np.float32(0.7493), np.float32(0.4775)] 
+2026-09-05 04:39:34.639987: val classification accuracy 0.5 
+2026-09-05 04:39:34.640145: val auc tensor(0.7949) 
+2026-09-05 04:39:34.640644: Epoch time: 76.44 s 
+2026-09-05 04:39:34.640788: Yayy! New best evaluation metric: 1.0470999479293823 
+2026-09-05 04:39:34.909037: 
+Task weights: 
+2026-09-05 04:39:34.913306:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 04:39:35.515782:  
+2026-09-05 04:39:35.515908: Epoch 3 
+2026-09-05 04:39:35.515994: Current learning rate: 0.00989 
+2026-09-05 04:40:50.942437: train_loss -0.1158 
+2026-09-05 04:40:50.942605: val_loss -0.1259 
+2026-09-05 04:40:50.942679: Pseudo dice [np.float32(0.9199), np.float32(0.4034), np.float32(0.8002), np.float32(0.5478)] 
+2026-09-05 04:40:50.942745: val classification accuracy 0.5 
+2026-09-05 04:40:50.942894: val auc tensor(0.4043) 
+2026-09-05 04:40:50.943388: Epoch time: 75.43 s 
+2026-09-05 04:40:51.515829:  
+2026-09-05 04:40:51.515935: Epoch 4 
+2026-09-05 04:40:51.516009: Current learning rate: 0.00986 
+2026-09-05 04:42:08.060986: train_loss -0.1395 
+2026-09-05 04:42:08.061145: val_loss -0.1661 
+2026-09-05 04:42:08.061220: Pseudo dice [np.float32(0.8926), np.float32(0.6479), np.float32(0.8001), np.float32(0.7182)] 
+2026-09-05 04:42:08.061288: val classification accuracy 0.5 
+2026-09-05 04:42:08.061432: val auc tensor(0.6719) 
+2026-09-05 04:42:08.061877: Epoch time: 76.55 s 
+2026-09-05 04:42:08.652932:  
+2026-09-05 04:42:08.653059: Epoch 5 
+2026-09-05 04:42:08.653143: Current learning rate: 0.00982 
+2026-09-05 04:43:25.075707: train_loss -0.1642 
+2026-09-05 04:43:25.075868: val_loss -0.1885 
+2026-09-05 04:43:25.075942: Pseudo dice [np.float32(0.9231), np.float32(0.7073), np.float32(0.8294), np.float32(0.7038)] 
+2026-09-05 04:43:25.076005: val classification accuracy 0.5 
+2026-09-05 04:43:25.076157: val auc tensor(0.7344) 
+2026-09-05 04:43:25.076601: Epoch time: 76.42 s 
+2026-09-05 04:43:25.076739: Yayy! New best evaluation metric: 1.1202000379562378 
+2026-09-05 04:43:25.349836: 
+Task weights: 
+2026-09-05 04:43:25.354270:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 04:43:25.933075:  
+2026-09-05 04:43:25.933192: Epoch 6 
+2026-09-05 04:43:25.933271: Current learning rate: 0.00978 
+2026-09-05 04:44:42.731055: train_loss -0.1906 
+2026-09-05 04:44:42.731207: val_loss -0.2077 
+2026-09-05 04:44:42.731280: Pseudo dice [np.float32(0.9239), np.float32(0.6843), np.float32(0.8593), np.float32(0.7459)] 
+2026-09-05 04:44:42.731343: val classification accuracy 0.5 
+2026-09-05 04:44:42.731488: val auc tensor(0.7188) 
+2026-09-05 04:44:42.731919: Epoch time: 76.8 s 
+2026-09-05 04:44:42.732061: Yayy! New best evaluation metric: 1.146299958229065 
+2026-09-05 04:44:43.004965: 
+Task weights: 
+2026-09-05 04:44:43.009588:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 04:44:43.585646:  
+2026-09-05 04:44:43.585764: Epoch 7 
+2026-09-05 04:44:43.585846: Current learning rate: 0.00975 
+2026-09-05 04:45:58.537767: train_loss -0.2186 
+2026-09-05 04:45:58.537942: val_loss -0.2295 
+2026-09-05 04:45:58.538016: Pseudo dice [np.float32(0.9379), np.float32(0.6869), np.float32(0.8888), np.float32(0.7429)] 
+2026-09-05 04:45:58.538091: val classification accuracy 0.5 
+2026-09-05 04:45:58.538241: val auc tensor(0.5547) 
+2026-09-05 04:45:58.538677: Epoch time: 74.95 s 
+2026-09-05 04:45:59.499761:  
+2026-09-05 04:45:59.499886: Epoch 8 
+2026-09-05 04:45:59.499963: Current learning rate: 0.00971 
+2026-09-05 04:47:16.882690: train_loss -0.2245 
+2026-09-05 04:47:16.882869: val_loss -0.1937 
+2026-09-05 04:47:16.882945: Pseudo dice [np.float32(0.9062), np.float32(0.6921), np.float32(0.8599), np.float32(0.8057)] 
+2026-09-05 04:47:16.883008: val classification accuracy 0.5625 
+2026-09-05 04:47:16.883164: val auc tensor(0.7188) 
+2026-09-05 04:47:16.883667: Epoch time: 77.38 s 
+2026-09-05 04:47:16.883815: Yayy! New best evaluation metric: 1.2200000286102295 
+2026-09-05 04:47:17.155831: 
+Task weights: 
+2026-09-05 04:47:17.161159:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 04:47:17.760107:  
+2026-09-05 04:47:17.760229: Epoch 9 
+2026-09-05 04:47:17.760304: Current learning rate: 0.00968 
+2026-09-05 04:48:33.763955: train_loss -0.2332 
+2026-09-05 04:48:33.764155: val_loss -0.2311 
+2026-09-05 04:48:33.764230: Pseudo dice [np.float32(0.9421), np.float32(0.7757), np.float32(0.878), np.float32(0.7348)] 
+2026-09-05 04:48:33.764295: val classification accuracy 0.5312 
+2026-09-05 04:48:33.764450: val auc tensor(0.5195) 
+2026-09-05 04:48:33.764950: Epoch time: 76.01 s 
+2026-09-05 04:48:34.348453:  
+2026-09-05 04:48:34.348575: Epoch 10 
+2026-09-05 04:48:34.348669: Current learning rate: 0.00964 
+2026-09-05 04:49:51.922004: train_loss -0.2402 
+2026-09-05 04:49:51.922204: val_loss -0.234 
+2026-09-05 04:49:51.922274: Pseudo dice [np.float32(0.9269), np.float32(0.7174), np.float32(0.8745), np.float32(0.8435)] 
+2026-09-05 04:49:51.922339: val classification accuracy 0.5 
+2026-09-05 04:49:51.922490: val auc tensor(0.6309) 
+2026-09-05 04:49:51.922981: Epoch time: 77.57 s 
+2026-09-05 04:49:52.509270:  
+2026-09-05 04:49:52.509398: Epoch 11 
+2026-09-05 04:49:52.509475: Current learning rate: 0.0096 
+2026-09-05 04:51:08.282292: train_loss -0.2542 
+2026-09-05 04:51:08.282471: val_loss -0.2412 
+2026-09-05 04:51:08.282544: Pseudo dice [np.float32(0.9461), np.float32(0.7633), np.float32(0.9048), np.float32(0.7998)] 
+2026-09-05 04:51:08.282611: val classification accuracy 0.5 
+2026-09-05 04:51:08.282759: val auc tensor(0.6680) 
+2026-09-05 04:51:08.283344: Epoch time: 75.77 s 
+2026-09-05 04:51:08.283500: Yayy! New best evaluation metric: 1.2618000507354736 
+2026-09-05 04:51:08.556326: 
+Task weights: 
+2026-09-05 04:51:08.560555:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 04:51:09.145215:  
+2026-09-05 04:51:09.145332: Epoch 12 
+2026-09-05 04:51:09.145409: Current learning rate: 0.00957 
+2026-09-05 04:52:26.567414: train_loss -0.2557 
+2026-09-05 04:52:26.567610: val_loss -0.2583 
+2026-09-05 04:52:26.567681: Pseudo dice [np.float32(0.9491), np.float32(0.7207), np.float32(0.9101), np.float32(0.7634)] 
+2026-09-05 04:52:26.567744: val classification accuracy 0.5 
+2026-09-05 04:52:26.567897: val auc tensor(0.9102) 
+2026-09-05 04:52:26.568404: Epoch time: 77.42 s 
+2026-09-05 04:52:26.568543: Yayy! New best evaluation metric: 1.5282000303268433 
+2026-09-05 04:52:26.839067: 
+Task weights: 
+2026-09-05 04:52:26.841043:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 04:52:27.423670:  
+2026-09-05 04:52:27.423793: Epoch 13 
+2026-09-05 04:52:27.423871: Current learning rate: 0.00953 
+2026-09-05 04:53:46.039009: train_loss -0.2618 
+2026-09-05 04:53:46.039211: val_loss -0.2353 
+2026-09-05 04:53:46.039284: Pseudo dice [np.float32(0.9303), np.float32(0.7664), np.float32(0.8697), np.float32(0.8107)] 
+2026-09-05 04:53:46.039348: val classification accuracy 0.5 
+2026-09-05 04:53:46.039507: val auc tensor(0.7656) 
+2026-09-05 04:53:46.040039: Epoch time: 78.62 s 
+2026-09-05 04:53:46.621152:  
+2026-09-05 04:53:46.621275: Epoch 14 
+2026-09-05 04:53:46.621347: Current learning rate: 0.00949 
+2026-09-05 04:55:02.617916: train_loss -0.2612 
+2026-09-05 04:55:02.618117: val_loss -0.2137 
+2026-09-05 04:55:02.618192: Pseudo dice [np.float32(0.9227), np.float32(0.6454), np.float32(0.8534), np.float32(0.7623)] 
+2026-09-05 04:55:02.618258: val classification accuracy 0.5 
+2026-09-05 04:55:02.618417: val auc tensor(0.6797) 
+2026-09-05 04:55:02.618919: Epoch time: 76.0 s 
+2026-09-05 04:55:03.206757:  
+2026-09-05 04:55:03.206887: Epoch 15 
+2026-09-05 04:55:03.206971: Current learning rate: 0.00946 
+2026-09-05 04:56:20.679827: train_loss -0.2676 
+2026-09-05 04:56:20.680168: val_loss -0.2425 
+2026-09-05 04:56:20.680245: Pseudo dice [np.float32(0.9141), np.float32(0.7285), np.float32(0.8996), np.float32(0.7534)] 
+2026-09-05 04:56:20.680309: val classification accuracy 0.5 
+2026-09-05 04:56:20.680463: val auc tensor(0.7871) 
+2026-09-05 04:56:20.680966: Epoch time: 77.47 s 
+2026-09-05 04:56:21.256911:  
+2026-09-05 04:56:21.257054: Epoch 16 
+2026-09-05 04:56:21.257149: Current learning rate: 0.00942 
+2026-09-05 04:57:36.953704: train_loss -0.28 
+2026-09-05 04:57:36.953860: val_loss -0.2461 
+2026-09-05 04:57:36.953931: Pseudo dice [np.float32(0.9304), np.float32(0.6965), np.float32(0.8993), np.float32(0.7861)] 
+2026-09-05 04:57:36.953993: val classification accuracy 0.5 
+2026-09-05 04:57:36.954145: val auc tensor(0.8906) 
+2026-09-05 04:57:36.954592: Epoch time: 75.7 s 
+2026-09-05 04:57:36.954731: Yayy! New best evaluation metric: 1.5791000127792358 
+2026-09-05 04:57:37.226023: 
+Task weights: 
+2026-09-05 04:57:37.227706:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 04:57:37.814901:  
+2026-09-05 04:57:37.815015: Epoch 17 
+2026-09-05 04:57:37.815091: Current learning rate: 0.00939 
+2026-09-05 04:58:54.857162: train_loss -0.2689 
+2026-09-05 04:58:54.857353: val_loss -0.2286 
+2026-09-05 04:58:54.857426: Pseudo dice [np.float32(0.9498), np.float32(0.6595), np.float32(0.8592), np.float32(0.8278)] 
+2026-09-05 04:58:54.857487: val classification accuracy 0.5 
+2026-09-05 04:58:54.857633: val auc tensor(0.7578) 
+2026-09-05 04:58:54.858139: Epoch time: 77.04 s 
+2026-09-05 04:58:55.449104:  
+2026-09-05 04:58:55.449227: Epoch 18 
+2026-09-05 04:58:55.449308: Current learning rate: 0.00935 
+2026-09-05 05:00:11.493163: train_loss -0.2817 
+2026-09-05 05:00:11.493337: val_loss -0.2635 
+2026-09-05 05:00:11.493410: Pseudo dice [np.float32(0.9486), np.float32(0.789), np.float32(0.9084), np.float32(0.8536)] 
+2026-09-05 05:00:11.493475: val classification accuracy 0.5 
+2026-09-05 05:00:11.493624: val auc tensor(0.4531) 
+2026-09-05 05:00:11.494097: Epoch time: 76.05 s 
+2026-09-05 05:00:12.081839:  
+2026-09-05 05:00:12.081970: Epoch 19 
+2026-09-05 05:00:12.082065: Current learning rate: 0.00931 
+2026-09-05 05:01:27.263840: train_loss -0.2866 
+2026-09-05 05:01:27.264043: val_loss -0.2712 
+2026-09-05 05:01:27.264116: Pseudo dice [np.float32(0.9339), np.float32(0.8144), np.float32(0.9188), np.float32(0.8087)] 
+2026-09-05 05:01:27.264182: val classification accuracy 0.5625 
+2026-09-05 05:01:27.264334: val auc tensor(0.8945) 
+2026-09-05 05:01:27.264827: Epoch time: 75.18 s 
+2026-09-05 05:01:27.264966: Yayy! New best evaluation metric: 1.6288000345230103 
+2026-09-05 05:01:27.537090: 
+Task weights: 
+2026-09-05 05:01:27.542144:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 05:01:28.134146:  
+2026-09-05 05:01:28.134256: Epoch 20 
+2026-09-05 05:01:28.134337: Current learning rate: 0.00928 
+2026-09-05 05:02:45.787395: train_loss -0.2869 
+2026-09-05 05:02:45.787551: val_loss -0.2439 
+2026-09-05 05:02:45.787622: Pseudo dice [np.float32(0.9405), np.float32(0.7463), np.float32(0.9046), np.float32(0.8241)] 
+2026-09-05 05:02:45.787686: val classification accuracy 0.5938 
+2026-09-05 05:02:45.788020: val auc tensor(0.7422) 
+2026-09-05 05:02:45.788501: Epoch time: 77.65 s 
+2026-09-05 05:02:46.385309:  
+2026-09-05 05:02:46.385439: Epoch 21 
+2026-09-05 05:02:46.385536: Current learning rate: 0.00924 
+2026-09-05 05:04:03.535091: train_loss -0.2984 
+2026-09-05 05:04:03.535286: val_loss -0.268 
+2026-09-05 05:04:03.535359: Pseudo dice [np.float32(0.9196), np.float32(0.7887), np.float32(0.8994), np.float32(0.8316)] 
+2026-09-05 05:04:03.535422: val classification accuracy 0.6875 
+2026-09-05 05:04:03.535575: val auc tensor(0.8750) 
+2026-09-05 05:04:03.536083: Epoch time: 77.15 s 
+2026-09-05 05:04:03.536230: Yayy! New best evaluation metric: 1.632599949836731 
+2026-09-05 05:04:03.811976: 
+Task weights: 
+2026-09-05 05:04:03.812897:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 05:04:04.395218:  
+2026-09-05 05:04:04.395347: Epoch 22 
+2026-09-05 05:04:04.395439: Current learning rate: 0.0092 
+2026-09-05 05:05:20.961863: train_loss -0.2734 
+2026-09-05 05:05:20.962048: val_loss -0.2316 
+2026-09-05 05:05:20.962124: Pseudo dice [np.float32(0.9324), np.float32(0.7202), np.float32(0.9075), np.float32(0.846)] 
+2026-09-05 05:05:20.962190: val classification accuracy 0.5 
+2026-09-05 05:05:20.962340: val auc tensor(0.7695) 
+2026-09-05 05:05:20.962809: Epoch time: 76.57 s 
+2026-09-05 05:05:21.538918:  
+2026-09-05 05:05:21.539044: Epoch 23 
+2026-09-05 05:05:21.539124: Current learning rate: 0.00917 
+2026-09-05 05:06:37.786324: train_loss -0.2952 
+2026-09-05 05:06:37.786513: val_loss -0.2864 
+2026-09-05 05:06:37.786586: Pseudo dice [np.float32(0.949), np.float32(0.7853), np.float32(0.9107), np.float32(0.8383)] 
+2026-09-05 05:06:37.786649: val classification accuracy 0.75 
+2026-09-05 05:06:37.786798: val auc tensor(0.8711) 
+2026-09-05 05:06:37.787301: Epoch time: 76.25 s 
+2026-09-05 05:06:37.787439: Yayy! New best evaluation metric: 1.6484999656677246 
+2026-09-05 05:06:38.059577: 
+Task weights: 
+2026-09-05 05:06:38.064371:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 05:06:39.051556:  
+2026-09-05 05:06:39.051679: Epoch 24 
+2026-09-05 05:06:39.051761: Current learning rate: 0.00913 
+2026-09-05 05:07:57.380414: train_loss -0.2986 
+2026-09-05 05:07:57.380609: val_loss -0.228 
+2026-09-05 05:07:57.380685: Pseudo dice [np.float32(0.9481), np.float32(0.8324), np.float32(0.9053), np.float32(0.8688)] 
+2026-09-05 05:07:57.380752: val classification accuracy 0.75 
+2026-09-05 05:07:57.380903: val auc tensor(0.7812) 
+2026-09-05 05:07:57.381418: Epoch time: 78.33 s 
+2026-09-05 05:07:57.954356:  
+2026-09-05 05:07:57.954480: Epoch 25 
+2026-09-05 05:07:57.954554: Current learning rate: 0.0091 
+2026-09-05 05:09:13.644795: train_loss -0.2909 
+2026-09-05 05:09:13.644991: val_loss -0.297 
+2026-09-05 05:09:13.645073: Pseudo dice [np.float32(0.9577), np.float32(0.8319), np.float32(0.8804), np.float32(0.8462)] 
+2026-09-05 05:09:13.645140: val classification accuracy 0.5 
+2026-09-05 05:09:13.645293: val auc tensor(0.8789) 
+2026-09-05 05:09:13.645779: Epoch time: 75.69 s 
+2026-09-05 05:09:13.645918: Yayy! New best evaluation metric: 1.6764999628067017 
+2026-09-05 05:09:13.919925: 
+Task weights: 
+2026-09-05 05:09:13.923259:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 05:09:14.504889:  
+2026-09-05 05:09:14.505013: Epoch 26 
+2026-09-05 05:09:14.505093: Current learning rate: 0.00906 
+2026-09-05 05:10:32.116581: train_loss -0.3008 
+2026-09-05 05:10:32.116780: val_loss -0.3015 
+2026-09-05 05:10:32.116858: Pseudo dice [np.float32(0.956), np.float32(0.8075), np.float32(0.9217), np.float32(0.8294)] 
+2026-09-05 05:10:32.116924: val classification accuracy 0.5 
+2026-09-05 05:10:32.117086: val auc tensor(0.9023) 
+2026-09-05 05:10:32.117593: Epoch time: 77.61 s 
+2026-09-05 05:10:32.117736: Yayy! New best evaluation metric: 1.7079999446868896 
+2026-09-05 05:10:32.393345: 
+Task weights: 
+2026-09-05 05:10:32.394680:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 05:10:32.970677:  
+2026-09-05 05:10:32.970803: Epoch 27 
+2026-09-05 05:10:32.970878: Current learning rate: 0.00902 
+2026-09-05 05:11:50.851713: train_loss -0.2988 
+2026-09-05 05:11:50.851912: val_loss -0.3001 
+2026-09-05 05:11:50.851985: Pseudo dice [np.float32(0.9303), np.float32(0.8559), np.float32(0.9183), np.float32(0.8374)] 
+2026-09-05 05:11:50.852056: val classification accuracy 0.5312 
+2026-09-05 05:11:50.852214: val auc tensor(0.8750) 
+2026-09-05 05:11:50.852714: Epoch time: 77.88 s 
+2026-09-05 05:11:51.429205:  
+2026-09-05 05:11:51.429321: Epoch 28 
+2026-09-05 05:11:51.429402: Current learning rate: 0.00899 
+2026-09-05 05:13:07.957068: train_loss -0.3043 
+2026-09-05 05:13:07.957219: val_loss -0.2557 
+2026-09-05 05:13:07.957295: Pseudo dice [np.float32(0.9421), np.float32(0.7925), np.float32(0.8943), np.float32(0.8606)] 
+2026-09-05 05:13:07.957360: val classification accuracy 0.5625 
+2026-09-05 05:13:07.957509: val auc tensor(0.7773) 
+2026-09-05 05:13:07.957971: Epoch time: 76.53 s 
+2026-09-05 05:13:08.532647:  
+2026-09-05 05:13:08.532769: Epoch 29 
+2026-09-05 05:13:08.532847: Current learning rate: 0.00895 
+2026-09-05 05:14:26.145383: train_loss -0.3105 
+2026-09-05 05:14:26.145546: val_loss -0.2808 
+2026-09-05 05:14:26.145618: Pseudo dice [np.float32(0.9445), np.float32(0.7899), np.float32(0.9075), np.float32(0.8337)] 
+2026-09-05 05:14:26.145685: val classification accuracy 0.5938 
+2026-09-05 05:14:26.145827: val auc tensor(0.8633) 
+2026-09-05 05:14:26.146297: Epoch time: 77.61 s 
+2026-09-05 05:14:26.724976:  
+2026-09-05 05:14:26.725102: Epoch 30 
+2026-09-05 05:14:26.725177: Current learning rate: 0.00891 
+2026-09-05 05:15:43.989980: train_loss -0.3155 
+2026-09-05 05:15:43.990142: val_loss -0.2846 
+2026-09-05 05:15:43.990217: Pseudo dice [np.float32(0.9607), np.float32(0.8143), np.float32(0.9297), np.float32(0.8343)] 
+2026-09-05 05:15:43.990283: val classification accuracy 0.7188 
+2026-09-05 05:15:43.990423: val auc tensor(0.7773) 
+2026-09-05 05:15:43.990855: Epoch time: 77.27 s 
+2026-09-05 05:15:44.570608:  
+2026-09-05 05:15:44.570731: Epoch 31 
+2026-09-05 05:15:44.570807: Current learning rate: 0.00888 
+2026-09-05 05:17:01.396828: train_loss -0.3165 
+2026-09-05 05:17:01.396986: val_loss -0.2898 
+2026-09-05 05:17:01.397064: Pseudo dice [np.float32(0.9577), np.float32(0.8132), np.float32(0.9107), np.float32(0.8358)] 
+2026-09-05 05:17:01.397131: val classification accuracy 0.7188 
+2026-09-05 05:17:01.397275: val auc tensor(0.8633) 
+2026-09-05 05:17:01.397710: Epoch time: 76.83 s 
+2026-09-05 05:17:02.010152:  
+2026-09-05 05:17:02.010289: Epoch 32 
+2026-09-05 05:17:02.010396: Current learning rate: 0.00884 
+2026-09-05 05:18:20.840138: train_loss -0.3279 
+2026-09-05 05:18:20.840342: val_loss -0.2808 
+2026-09-05 05:18:20.840416: Pseudo dice [np.float32(0.9541), np.float32(0.7947), np.float32(0.9042), np.float32(0.8198)] 
+2026-09-05 05:18:20.840481: val classification accuracy 0.8125 
+2026-09-05 05:18:20.840640: val auc tensor(0.9062) 
+2026-09-05 05:18:20.841172: Epoch time: 78.83 s 
+2026-09-05 05:18:20.841322: Yayy! New best evaluation metric: 1.7448999881744385 
+2026-09-05 05:18:21.115405: 
+Task weights: 
+2026-09-05 05:18:21.118335:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 05:18:21.702001:  
+2026-09-05 05:18:21.702117: Epoch 33 
+2026-09-05 05:18:21.702193: Current learning rate: 0.0088 
+2026-09-05 05:19:38.958535: train_loss -0.3183 
+2026-09-05 05:19:38.958735: val_loss -0.1829 
+2026-09-05 05:19:38.958807: Pseudo dice [np.float32(0.9478), np.float32(0.7837), np.float32(0.9196), np.float32(0.8514)] 
+2026-09-05 05:19:38.958870: val classification accuracy 0.6562 
+2026-09-05 05:19:38.959035: val auc tensor(0.7402) 
+2026-09-05 05:19:38.959558: Epoch time: 77.26 s 
+2026-09-05 05:19:39.540830:  
+2026-09-05 05:19:39.540954: Epoch 34 
+2026-09-05 05:19:39.541035: Current learning rate: 0.00877 
+2026-09-05 05:20:56.361196: train_loss -0.3211 
+2026-09-05 05:20:56.361405: val_loss -0.2356 
+2026-09-05 05:20:56.361479: Pseudo dice [np.float32(0.9281), np.float32(0.6144), np.float32(0.8964), np.float32(0.8394)] 
+2026-09-05 05:20:56.361549: val classification accuracy 0.5312 
+2026-09-05 05:20:56.361933: val auc tensor(0.7578) 
+2026-09-05 05:20:56.362487: Epoch time: 76.82 s 
+2026-09-05 05:20:56.949143:  
+2026-09-05 05:20:56.949258: Epoch 35 
+2026-09-05 05:20:56.949331: Current learning rate: 0.00873 
+2026-09-05 05:22:14.249626: train_loss -0.3182 
+2026-09-05 05:22:14.249826: val_loss -0.2942 
+2026-09-05 05:22:14.249905: Pseudo dice [np.float32(0.9568), np.float32(0.8734), np.float32(0.9345), np.float32(0.8308)] 
+2026-09-05 05:22:14.249973: val classification accuracy 0.6562 
+2026-09-05 05:22:14.250135: val auc tensor(0.7969) 
+2026-09-05 05:22:14.250620: Epoch time: 77.3 s 
+2026-09-05 05:22:14.837249:  
+2026-09-05 05:22:14.837374: Epoch 36 
+2026-09-05 05:22:14.837462: Current learning rate: 0.00869 
+2026-09-05 05:23:32.606815: train_loss -0.3144 
+2026-09-05 05:23:32.607014: val_loss -0.2825 
+2026-09-05 05:23:32.607097: Pseudo dice [np.float32(0.951), np.float32(0.8547), np.float32(0.9122), np.float32(0.8265)] 
+2026-09-05 05:23:32.607163: val classification accuracy 0.625 
+2026-09-05 05:23:32.607317: val auc tensor(0.7617) 
+2026-09-05 05:23:32.607807: Epoch time: 77.77 s 
+2026-09-05 05:23:33.192736:  
+2026-09-05 05:23:33.192858: Epoch 37 
+2026-09-05 05:23:33.192936: Current learning rate: 0.00866 
+2026-09-05 05:24:50.004436: train_loss -0.3333 
+2026-09-05 05:24:50.004635: val_loss -0.1874 
+2026-09-05 05:24:50.004709: Pseudo dice [np.float32(0.9401), np.float32(0.8187), np.float32(0.8902), np.float32(0.8233)] 
+2026-09-05 05:24:50.004771: val classification accuracy 0.5938 
+2026-09-05 05:24:50.004923: val auc tensor(0.6504) 
+2026-09-05 05:24:50.005421: Epoch time: 76.81 s 
+2026-09-05 05:24:50.596300:  
+2026-09-05 05:24:50.596427: Epoch 38 
+2026-09-05 05:24:50.596505: Current learning rate: 0.00862 
+2026-09-05 05:26:06.961705: train_loss -0.331 
+2026-09-05 05:26:06.961874: val_loss -0.2524 
+2026-09-05 05:26:06.961946: Pseudo dice [np.float32(0.9508), np.float32(0.8164), np.float32(0.9071), np.float32(0.8527)] 
+2026-09-05 05:26:06.962010: val classification accuracy 0.4375 
+2026-09-05 05:26:06.962169: val auc tensor(0.6055) 
+2026-09-05 05:26:06.962626: Epoch time: 76.37 s 
+2026-09-05 05:26:07.555913:  
+2026-09-05 05:26:07.556062: Epoch 39 
+2026-09-05 05:26:07.556150: Current learning rate: 0.00858 
+2026-09-05 05:27:24.298801: train_loss -0.3314 
+2026-09-05 05:27:24.299005: val_loss -0.3136 
+2026-09-05 05:27:24.299085: Pseudo dice [np.float32(0.9477), np.float32(0.8152), np.float32(0.9137), np.float32(0.8631)] 
+2026-09-05 05:27:24.299149: val classification accuracy 0.5312 
+2026-09-05 05:27:24.299303: val auc tensor(0.8125) 
+2026-09-05 05:27:24.299796: Epoch time: 76.74 s 
+2026-09-05 05:27:24.898438:  
+2026-09-05 05:27:24.898564: Epoch 40 
+2026-09-05 05:27:24.898637: Current learning rate: 0.00855 
+2026-09-05 05:28:41.761841: train_loss -0.3164 
+2026-09-05 05:28:41.761995: val_loss -0.2965 
+2026-09-05 05:28:41.762075: Pseudo dice [np.float32(0.9344), np.float32(0.7847), np.float32(0.893), np.float32(0.8504)] 
+2026-09-05 05:28:41.762142: val classification accuracy 0.5938 
+2026-09-05 05:28:41.762292: val auc tensor(0.8320) 
+2026-09-05 05:28:41.762729: Epoch time: 76.86 s 
+2026-09-05 05:28:42.358346:  
+2026-09-05 05:28:42.358478: Epoch 41 
+2026-09-05 05:28:42.358565: Current learning rate: 0.00851 
+2026-09-05 05:29:58.151715: train_loss -0.3257 
+2026-09-05 05:29:58.151919: val_loss -0.1841 
+2026-09-05 05:29:58.151996: Pseudo dice [np.float32(0.9586), np.float32(0.7784), np.float32(0.9243), np.float32(0.8581)] 
+2026-09-05 05:29:58.152069: val classification accuracy 0.5 
+2026-09-05 05:29:58.152231: val auc tensor(0.8281) 
+2026-09-05 05:29:58.152751: Epoch time: 75.79 s 
+2026-09-05 05:29:58.731711:  
+2026-09-05 05:29:58.731842: Epoch 42 
+2026-09-05 05:29:58.731913: Current learning rate: 0.00847 
+2026-09-05 05:31:16.007857: train_loss -0.3194 
+2026-09-05 05:31:16.008047: val_loss -0.2255 
+2026-09-05 05:31:16.008123: Pseudo dice [np.float32(0.9535), np.float32(0.7096), np.float32(0.9149), np.float32(0.7164)] 
+2026-09-05 05:31:16.008194: val classification accuracy 0.5 
+2026-09-05 05:31:16.008351: val auc tensor(0.6484) 
+2026-09-05 05:31:16.008848: Epoch time: 77.28 s 
+2026-09-05 05:31:16.587863:  
+2026-09-05 05:31:16.587999: Epoch 43 
+2026-09-05 05:31:16.588088: Current learning rate: 0.00844 
+2026-09-05 05:32:34.499312: train_loss -0.3096 
+2026-09-05 05:32:34.499515: val_loss -0.2509 
+2026-09-05 05:32:34.499627: Pseudo dice [np.float32(0.9404), np.float32(0.808), np.float32(0.9227), np.float32(0.8699)] 
+2026-09-05 05:32:34.499695: val classification accuracy 0.5 
+2026-09-05 05:32:34.499854: val auc tensor(0.7656) 
+2026-09-05 05:32:34.500396: Epoch time: 77.91 s 
+2026-09-05 05:32:35.082510:  
+2026-09-05 05:32:35.082645: Epoch 44 
+2026-09-05 05:32:35.082730: Current learning rate: 0.0084 
+2026-09-05 05:33:52.534361: train_loss -0.3276 
+2026-09-05 05:33:52.534545: val_loss -0.2998 
+2026-09-05 05:33:52.534620: Pseudo dice [np.float32(0.9443), np.float32(0.7923), np.float32(0.9138), np.float32(0.882)] 
+2026-09-05 05:33:52.534685: val classification accuracy 0.5625 
+2026-09-05 05:33:52.534843: val auc tensor(0.9648) 
+2026-09-05 05:33:52.535354: Epoch time: 77.45 s 
+2026-09-05 05:33:52.535500: Yayy! New best evaluation metric: 1.8270000219345093 
+2026-09-05 05:33:52.808561: 
+Task weights: 
+2026-09-05 05:33:52.812429:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 05:33:53.391621:  
+2026-09-05 05:33:53.391758: Epoch 45 
+2026-09-05 05:33:53.391849: Current learning rate: 0.00836 
+2026-09-05 05:35:09.054872: train_loss -0.3155 
+2026-09-05 05:35:09.055065: val_loss -0.2327 
+2026-09-05 05:35:09.055145: Pseudo dice [np.float32(0.9406), np.float32(0.8436), np.float32(0.9087), np.float32(0.8181)] 
+2026-09-05 05:35:09.055212: val classification accuracy 0.5 
+2026-09-05 05:35:09.055367: val auc tensor(0.8516) 
+2026-09-05 05:35:09.055837: Epoch time: 75.66 s 
+2026-09-05 05:35:09.670444:  
+2026-09-05 05:35:09.670571: Epoch 46 
+2026-09-05 05:35:09.670673: Current learning rate: 0.00833 
+2026-09-05 05:36:25.745545: train_loss -0.3 
+2026-09-05 05:36:25.745752: val_loss -0.2819 
+2026-09-05 05:36:25.745825: Pseudo dice [np.float32(0.9597), np.float32(0.7215), np.float32(0.9268), np.float32(0.8545)] 
+2026-09-05 05:36:25.745889: val classification accuracy 0.5 
+2026-09-05 05:36:25.746055: val auc tensor(0.8047) 
+2026-09-05 05:36:25.746584: Epoch time: 76.08 s 
+2026-09-05 05:36:26.324422:  
+2026-09-05 05:36:26.324552: Epoch 47 
+2026-09-05 05:36:26.324636: Current learning rate: 0.00829 
+2026-09-05 05:37:44.124094: train_loss -0.3388 
+2026-09-05 05:37:44.124275: val_loss -0.2826 
+2026-09-05 05:37:44.124349: Pseudo dice [np.float32(0.9477), np.float32(0.8265), np.float32(0.9247), np.float32(0.8514)] 
+2026-09-05 05:37:44.124414: val classification accuracy 0.5938 
+2026-09-05 05:37:44.124560: val auc tensor(0.8789) 
+2026-09-05 05:37:44.125036: Epoch time: 77.8 s 
+2026-09-05 05:37:44.744406:  
+2026-09-05 05:37:44.744530: Epoch 48 
+2026-09-05 05:37:44.744608: Current learning rate: 0.00825 
+2026-09-05 05:39:01.408302: train_loss -0.3406 
+2026-09-05 05:39:01.408506: val_loss -0.2984 
+2026-09-05 05:39:01.408577: Pseudo dice [np.float32(0.9575), np.float32(0.8377), np.float32(0.9212), np.float32(0.8525)] 
+2026-09-05 05:39:01.408642: val classification accuracy 0.5312 
+2026-09-05 05:39:01.408802: val auc tensor(0.8008) 
+2026-09-05 05:39:01.409333: Epoch time: 76.67 s 
+2026-09-05 05:39:01.992831:  
+2026-09-05 05:39:01.992957: Epoch 49 
+2026-09-05 05:39:01.993038: Current learning rate: 0.00822 
+2026-09-05 05:40:18.649269: train_loss -0.3435 
+2026-09-05 05:40:18.649446: val_loss -0.1336 
+2026-09-05 05:40:18.649520: Pseudo dice [np.float32(0.9404), np.float32(0.7436), np.float32(0.9202), np.float32(0.8542)] 
+2026-09-05 05:40:18.649583: val classification accuracy 0.5 
+2026-09-05 05:40:18.649728: val auc tensor(0.7852) 
+2026-09-05 05:40:18.650211: Epoch time: 76.66 s 
+2026-09-05 05:40:19.530733:  
+2026-09-05 05:40:19.530862: Epoch 50 
+2026-09-05 05:40:19.530941: Current learning rate: 0.00818 
+2026-09-05 05:41:35.878729: train_loss -0.3573 
+2026-09-05 05:41:35.878930: val_loss -0.1798 
+2026-09-05 05:41:35.879004: Pseudo dice [np.float32(0.9562), np.float32(0.8771), np.float32(0.9231), np.float32(0.852)] 
+2026-09-05 05:41:35.879077: val classification accuracy 0.5625 
+2026-09-05 05:41:35.879447: val auc tensor(0.7148) 
+2026-09-05 05:41:35.879968: Epoch time: 76.35 s 
+2026-09-05 05:41:36.463323:  
+2026-09-05 05:41:36.463450: Epoch 51 
+2026-09-05 05:41:36.463525: Current learning rate: 0.00814 
+2026-09-05 05:42:52.921905: train_loss -0.3502 
+2026-09-05 05:42:52.922090: val_loss -0.2993 
+2026-09-05 05:42:52.922167: Pseudo dice [np.float32(0.9604), np.float32(0.8575), np.float32(0.9292), np.float32(0.8696)] 
+2026-09-05 05:42:52.922230: val classification accuracy 0.6875 
+2026-09-05 05:42:52.922376: val auc tensor(0.8984) 
+2026-09-05 05:42:52.922844: Epoch time: 76.46 s 
+2026-09-05 05:42:53.504649:  
+2026-09-05 05:42:53.504768: Epoch 52 
+2026-09-05 05:42:53.504849: Current learning rate: 0.00811 
+2026-09-05 05:44:10.593877: train_loss -0.3514 
+2026-09-05 05:44:10.594087: val_loss -0.3032 
+2026-09-05 05:44:10.594165: Pseudo dice [np.float32(0.9617), np.float32(0.8574), np.float32(0.9354), np.float32(0.8422)] 
+2026-09-05 05:44:10.594230: val classification accuracy 0.7188 
+2026-09-05 05:44:10.594390: val auc tensor(0.8906) 
+2026-09-05 05:44:10.594903: Epoch time: 77.09 s 
+2026-09-05 05:44:11.176536:  
+2026-09-05 05:44:11.176660: Epoch 53 
+2026-09-05 05:44:11.176740: Current learning rate: 0.00807 
+2026-09-05 05:45:27.141817: train_loss -0.3402 
+2026-09-05 05:45:27.141999: val_loss -0.272 
+2026-09-05 05:45:27.142078: Pseudo dice [np.float32(0.9641), np.float32(0.7312), np.float32(0.9199), np.float32(0.8498)] 
+2026-09-05 05:45:27.142145: val classification accuracy 0.5312 
+2026-09-05 05:45:27.142294: val auc tensor(0.8672) 
+2026-09-05 05:45:27.142762: Epoch time: 75.97 s 
+2026-09-05 05:45:27.722562:  
+2026-09-05 05:45:27.722672: Epoch 54 
+2026-09-05 05:45:27.722743: Current learning rate: 0.00803 
+2026-09-05 05:46:44.127611: train_loss -0.3506 
+2026-09-05 05:46:44.127810: val_loss -0.1669 
+2026-09-05 05:46:44.127883: Pseudo dice [np.float32(0.9677), np.float32(0.8688), np.float32(0.9344), np.float32(0.8548)] 
+2026-09-05 05:46:44.127949: val classification accuracy 0.5 
+2026-09-05 05:46:44.128113: val auc tensor(0.8828) 
+2026-09-05 05:46:44.128641: Epoch time: 76.41 s 
+2026-09-05 05:46:44.713314:  
+2026-09-05 05:46:44.713442: Epoch 55 
+2026-09-05 05:46:44.713535: Current learning rate: 0.008 
+2026-09-05 05:48:00.684154: train_loss -0.3412 
+2026-09-05 05:48:00.684336: val_loss -0.2602 
+2026-09-05 05:48:00.684411: Pseudo dice [np.float32(0.9502), np.float32(0.862), np.float32(0.9061), np.float32(0.8857)] 
+2026-09-05 05:48:00.684475: val classification accuracy 0.5 
+2026-09-05 05:48:00.684622: val auc tensor(0.8633) 
+2026-09-05 05:48:00.685092: Epoch time: 75.97 s 
+2026-09-05 05:48:01.265421:  
+2026-09-05 05:48:01.265550: Epoch 56 
+2026-09-05 05:48:01.265636: Current learning rate: 0.00796 
+2026-09-05 05:49:19.702936: train_loss -0.3474 
+2026-09-05 05:49:19.703107: val_loss -0.2555 
+2026-09-05 05:49:19.703178: Pseudo dice [np.float32(0.9565), np.float32(0.853), np.float32(0.9182), np.float32(0.8498)] 
+2026-09-05 05:49:19.703240: val classification accuracy 0.5 
+2026-09-05 05:49:19.703385: val auc tensor(0.6934) 
+2026-09-05 05:49:19.703825: Epoch time: 78.44 s 
+2026-09-05 05:49:20.292159:  
+2026-09-05 05:49:20.292290: Epoch 57 
+2026-09-05 05:49:20.292370: Current learning rate: 0.00792 
+2026-09-05 05:50:37.506157: train_loss -0.3431 
+2026-09-05 05:50:37.506343: val_loss -0.1836 
+2026-09-05 05:50:37.506418: Pseudo dice [np.float32(0.9235), np.float32(0.8685), np.float32(0.9176), np.float32(0.8624)] 
+2026-09-05 05:50:37.506484: val classification accuracy 0.5625 
+2026-09-05 05:50:37.506634: val auc tensor(0.6074) 
+2026-09-05 05:50:37.507105: Epoch time: 77.22 s 
+2026-09-05 05:50:38.088161:  
+2026-09-05 05:50:38.088290: Epoch 58 
+2026-09-05 05:50:38.088368: Current learning rate: 0.00789 
+2026-09-05 05:51:54.419814: train_loss -0.3528 
+2026-09-05 05:51:54.419977: val_loss -0.2913 
+2026-09-05 05:51:54.420057: Pseudo dice [np.float32(0.953), np.float32(0.8357), np.float32(0.9219), np.float32(0.8522)] 
+2026-09-05 05:51:54.420120: val classification accuracy 0.7188 
+2026-09-05 05:51:54.420264: val auc tensor(0.8164) 
+2026-09-05 05:51:54.420706: Epoch time: 76.33 s 
+2026-09-05 05:51:55.002052:  
+2026-09-05 05:51:55.002173: Epoch 59 
+2026-09-05 05:51:55.002245: Current learning rate: 0.00785 
+2026-09-05 05:53:11.850337: train_loss -0.349 
+2026-09-05 05:53:11.850499: val_loss -0.3187 
+2026-09-05 05:53:11.850571: Pseudo dice [np.float32(0.9388), np.float32(0.7944), np.float32(0.9078), np.float32(0.8805)] 
+2026-09-05 05:53:11.850635: val classification accuracy 0.9375 
+2026-09-05 05:53:11.850780: val auc tensor(0.9844) 
+2026-09-05 05:53:11.851251: Epoch time: 76.85 s 
+2026-09-05 05:53:11.851392: Yayy! New best evaluation metric: 1.868499994277954 
+2026-09-05 05:53:12.089890: 
+Task weights: 
+2026-09-05 05:53:12.092204:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 05:53:12.661261:  
+2026-09-05 05:53:12.661385: Epoch 60 
+2026-09-05 05:53:12.661459: Current learning rate: 0.00781 
+2026-09-05 05:54:25.661994: train_loss -0.3615 
+2026-09-05 05:54:25.662173: val_loss -0.3391 
+2026-09-05 05:54:25.662249: Pseudo dice [np.float32(0.9683), np.float32(0.8307), np.float32(0.9332), np.float32(0.8736)] 
+2026-09-05 05:54:25.662314: val classification accuracy 0.8438 
+2026-09-05 05:54:25.662466: val auc tensor(0.9375) 
+2026-09-05 05:54:25.662913: Epoch time: 73.0 s 
+2026-09-05 05:54:26.244351:  
+2026-09-05 05:54:26.244479: Epoch 61 
+2026-09-05 05:54:26.244558: Current learning rate: 0.00777 
+2026-09-05 05:55:41.633873: train_loss -0.3607 
+2026-09-05 05:55:41.634075: val_loss -0.3314 
+2026-09-05 05:55:41.634152: Pseudo dice [np.float32(0.9647), np.float32(0.7589), np.float32(0.9248), np.float32(0.8512)] 
+2026-09-05 05:55:41.634218: val classification accuracy 0.75 
+2026-09-05 05:55:41.634374: val auc tensor(1.) 
+2026-09-05 05:55:41.634866: Epoch time: 75.39 s 
+2026-09-05 05:55:41.635010: Yayy! New best evaluation metric: 1.8846999406814575 
+2026-09-05 05:55:41.914210: 
+Task weights: 
+2026-09-05 05:55:41.915105:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 05:55:42.515926:  
+2026-09-05 05:55:42.516046: Epoch 62 
+2026-09-05 05:55:42.516128: Current learning rate: 0.00774 
+2026-09-05 05:57:00.009114: train_loss -0.355 
+2026-09-05 05:57:00.009308: val_loss -0.2415 
+2026-09-05 05:57:00.009381: Pseudo dice [np.float32(0.9611), np.float32(0.8036), np.float32(0.9192), np.float32(0.8779)] 
+2026-09-05 05:57:00.009446: val classification accuracy 0.5 
+2026-09-05 05:57:00.009602: val auc tensor(0.7266) 
+2026-09-05 05:57:00.010112: Epoch time: 77.49 s 
+2026-09-05 05:57:00.593328:  
+2026-09-05 05:57:00.593461: Epoch 63 
+2026-09-05 05:57:00.593538: Current learning rate: 0.0077 
+2026-09-05 05:58:16.356908: train_loss -0.3669 
+2026-09-05 05:58:16.357119: val_loss -0.3225 
+2026-09-05 05:58:16.357194: Pseudo dice [np.float32(0.9562), np.float32(0.8538), np.float32(0.9211), np.float32(0.8808)] 
+2026-09-05 05:58:16.357260: val classification accuracy 0.5938 
+2026-09-05 05:58:16.357414: val auc tensor(0.8203) 
+2026-09-05 05:58:16.357928: Epoch time: 75.76 s 
+2026-09-05 05:58:16.940718:  
+2026-09-05 05:58:16.940831: Epoch 64 
+2026-09-05 05:58:16.940905: Current learning rate: 0.00766 
+2026-09-05 05:59:32.760600: train_loss -0.3681 
+2026-09-05 05:59:32.760781: val_loss -0.3195 
+2026-09-05 05:59:32.760853: Pseudo dice [np.float32(0.9676), np.float32(0.8556), np.float32(0.928), np.float32(0.8779)] 
+2026-09-05 05:59:32.760917: val classification accuracy 0.7188 
+2026-09-05 05:59:32.761079: val auc tensor(0.8984) 
+2026-09-05 05:59:32.761567: Epoch time: 75.82 s 
+2026-09-05 05:59:33.342430:  
+2026-09-05 05:59:33.342562: Epoch 65 
+2026-09-05 05:59:33.342651: Current learning rate: 0.00763 
+2026-09-05 06:00:50.368283: train_loss -0.3627 
+2026-09-05 06:00:50.368442: val_loss -0.2142 
+2026-09-05 06:00:50.368522: Pseudo dice [np.float32(0.9476), np.float32(0.8297), np.float32(0.9218), np.float32(0.8749)] 
+2026-09-05 06:00:50.368588: val classification accuracy 0.6562 
+2026-09-05 06:00:50.368735: val auc tensor(0.7188) 
+2026-09-05 06:00:50.369179: Epoch time: 77.03 s 
+2026-09-05 06:00:50.948034:  
+2026-09-05 06:00:50.948150: Epoch 66 
+2026-09-05 06:00:50.948221: Current learning rate: 0.00759 
+2026-09-05 06:02:09.955312: train_loss -0.3579 
+2026-09-05 06:02:09.955635: val_loss -0.2916 
+2026-09-05 06:02:09.955710: Pseudo dice [np.float32(0.9607), np.float32(0.8508), np.float32(0.9292), np.float32(0.8824)] 
+2026-09-05 06:02:09.955776: val classification accuracy 0.625 
+2026-09-05 06:02:09.955922: val auc tensor(0.9336) 
+2026-09-05 06:02:09.956374: Epoch time: 79.01 s 
+2026-09-05 06:02:10.546362:  
+2026-09-05 06:02:10.546490: Epoch 67 
+2026-09-05 06:02:10.546567: Current learning rate: 0.00755 
+2026-09-05 06:03:26.361405: train_loss -0.3594 
+2026-09-05 06:03:26.361586: val_loss -0.3029 
+2026-09-05 06:03:26.361661: Pseudo dice [np.float32(0.9524), np.float32(0.7791), np.float32(0.9189), np.float32(0.8592)] 
+2026-09-05 06:03:26.361726: val classification accuracy 0.8438 
+2026-09-05 06:03:26.361875: val auc tensor(0.9531) 
+2026-09-05 06:03:26.362334: Epoch time: 75.82 s 
+2026-09-05 06:03:26.983080:  
+2026-09-05 06:03:26.983210: Epoch 68 
+2026-09-05 06:03:26.983284: Current learning rate: 0.00751 
+2026-09-05 06:04:44.776835: train_loss -0.364 
+2026-09-05 06:04:44.777033: val_loss -0.1787 
+2026-09-05 06:04:44.777108: Pseudo dice [np.float32(0.954), np.float32(0.8247), np.float32(0.9122), np.float32(0.8947)] 
+2026-09-05 06:04:44.777173: val classification accuracy 0.7812 
+2026-09-05 06:04:44.777323: val auc tensor(0.8086) 
+2026-09-05 06:04:44.777814: Epoch time: 77.79 s 
+2026-09-05 06:04:45.364564:  
+2026-09-05 06:04:45.364695: Epoch 69 
+2026-09-05 06:04:45.364783: Current learning rate: 0.00748 
+2026-09-05 06:05:59.328514: train_loss -0.355 
+2026-09-05 06:05:59.328677: val_loss -0.2756 
+2026-09-05 06:05:59.328754: Pseudo dice [np.float32(0.9584), np.float32(0.8079), np.float32(0.9234), np.float32(0.8794)] 
+2026-09-05 06:05:59.328820: val classification accuracy 0.5625 
+2026-09-05 06:05:59.328963: val auc tensor(0.8047) 
+2026-09-05 06:05:59.329417: Epoch time: 73.97 s 
+2026-09-05 06:05:59.917076:  
+2026-09-05 06:05:59.917202: Epoch 70 
+2026-09-05 06:05:59.917276: Current learning rate: 0.00744 
+2026-09-05 06:07:15.684251: train_loss -0.3595 
+2026-09-05 06:07:15.684446: val_loss -0.2841 
+2026-09-05 06:07:15.684520: Pseudo dice [np.float32(0.9657), np.float32(0.7901), np.float32(0.9122), np.float32(0.8563)] 
+2026-09-05 06:07:15.684585: val classification accuracy 0.5 
+2026-09-05 06:07:15.684737: val auc tensor(0.8789) 
+2026-09-05 06:07:15.685239: Epoch time: 75.77 s 
+2026-09-05 06:07:16.271653:  
+2026-09-05 06:07:16.271778: Epoch 71 
+2026-09-05 06:07:16.271858: Current learning rate: 0.0074 
+2026-09-05 06:08:32.831416: train_loss -0.354 
+2026-09-05 06:08:32.831568: val_loss -0.2782 
+2026-09-05 06:08:32.831638: Pseudo dice [np.float32(0.9611), np.float32(0.8665), np.float32(0.943), np.float32(0.8571)] 
+2026-09-05 06:08:32.831699: val classification accuracy 0.5 
+2026-09-05 06:08:32.831837: val auc tensor(0.7695) 
+2026-09-05 06:08:32.832286: Epoch time: 76.56 s 
+2026-09-05 06:08:33.422651:  
+2026-09-05 06:08:33.422776: Epoch 72 
+2026-09-05 06:08:33.422855: Current learning rate: 0.00737 
+2026-09-05 06:09:52.449509: train_loss -0.3505 
+2026-09-05 06:09:52.449706: val_loss -0.2694 
+2026-09-05 06:09:52.449782: Pseudo dice [np.float32(0.9564), np.float32(0.8468), np.float32(0.9232), np.float32(0.8336)] 
+2026-09-05 06:09:52.449846: val classification accuracy 0.5938 
+2026-09-05 06:09:52.450000: val auc tensor(0.6992) 
+2026-09-05 06:09:52.450497: Epoch time: 79.03 s 
+2026-09-05 06:09:53.456486:  
+2026-09-05 06:09:53.456621: Epoch 73 
+2026-09-05 06:09:53.456700: Current learning rate: 0.00733 
+2026-09-05 06:11:10.060269: train_loss -0.352 
+2026-09-05 06:11:10.060453: val_loss -0.2954 
+2026-09-05 06:11:10.060524: Pseudo dice [np.float32(0.9535), np.float32(0.8455), np.float32(0.9323), np.float32(0.8702)] 
+2026-09-05 06:11:10.060596: val classification accuracy 0.625 
+2026-09-05 06:11:10.060748: val auc tensor(0.9180) 
+2026-09-05 06:11:10.061253: Epoch time: 76.6 s 
+2026-09-05 06:11:10.655803:  
+2026-09-05 06:11:10.655931: Epoch 74 
+2026-09-05 06:11:10.656006: Current learning rate: 0.00729 
+2026-09-05 06:12:27.445693: train_loss -0.366 
+2026-09-05 06:12:27.445893: val_loss -0.2807 
+2026-09-05 06:12:27.445966: Pseudo dice [np.float32(0.9596), np.float32(0.8542), np.float32(0.9286), np.float32(0.871)] 
+2026-09-05 06:12:27.446037: val classification accuracy 0.625 
+2026-09-05 06:12:27.446193: val auc tensor(0.8516) 
+2026-09-05 06:12:27.446700: Epoch time: 76.79 s 
+2026-09-05 06:12:28.037580:  
+2026-09-05 06:12:28.037708: Epoch 75 
+2026-09-05 06:12:28.037785: Current learning rate: 0.00725 
+2026-09-05 06:13:43.756866: train_loss -0.3652 
+2026-09-05 06:13:43.757057: val_loss -0.2497 
+2026-09-05 06:13:43.757131: Pseudo dice [np.float32(0.9493), np.float32(0.8762), np.float32(0.9266), np.float32(0.9013)] 
+2026-09-05 06:13:43.757195: val classification accuracy 0.6875 
+2026-09-05 06:13:43.757341: val auc tensor(0.8945) 
+2026-09-05 06:13:43.757832: Epoch time: 75.72 s 
+2026-09-05 06:13:44.353056:  
+2026-09-05 06:13:44.353200: Epoch 76 
+2026-09-05 06:13:44.353292: Current learning rate: 0.00722 
+2026-09-05 06:14:59.705701: train_loss -0.3677 
+2026-09-05 06:14:59.705904: val_loss -0.2871 
+2026-09-05 06:14:59.705978: Pseudo dice [np.float32(0.9496), np.float32(0.8481), np.float32(0.9393), np.float32(0.8587)] 
+2026-09-05 06:14:59.706050: val classification accuracy 0.7188 
+2026-09-05 06:14:59.706208: val auc tensor(0.8984) 
+2026-09-05 06:14:59.706721: Epoch time: 75.35 s 
+2026-09-05 06:15:00.298687:  
+2026-09-05 06:15:00.298820: Epoch 77 
+2026-09-05 06:15:00.298903: Current learning rate: 0.00718 
+2026-09-05 06:16:15.805061: train_loss -0.3736 
+2026-09-05 06:16:15.805220: val_loss -0.2457 
+2026-09-05 06:16:15.805293: Pseudo dice [np.float32(0.9588), np.float32(0.7926), np.float32(0.9274), np.float32(0.8823)] 
+2026-09-05 06:16:15.805359: val classification accuracy 0.5938 
+2026-09-05 06:16:15.805506: val auc tensor(0.9590) 
+2026-09-05 06:16:15.805939: Epoch time: 75.51 s 
+2026-09-05 06:16:16.404149:  
+2026-09-05 06:16:16.404289: Epoch 78 
+2026-09-05 06:16:16.404384: Current learning rate: 0.00714 
+2026-09-05 06:17:31.896939: train_loss -0.3358 
+2026-09-05 06:17:31.897144: val_loss -0.2992 
+2026-09-05 06:17:31.897217: Pseudo dice [np.float32(0.9451), np.float32(0.7964), np.float32(0.9265), np.float32(0.8793)] 
+2026-09-05 06:17:31.897282: val classification accuracy 0.625 
+2026-09-05 06:17:31.897432: val auc tensor(0.8320) 
+2026-09-05 06:17:31.897937: Epoch time: 75.49 s 
+2026-09-05 06:17:32.494885:  
+2026-09-05 06:17:32.495019: Epoch 79 
+2026-09-05 06:17:32.495129: Current learning rate: 0.0071 
+2026-09-05 06:18:47.691894: train_loss -0.3533 
+2026-09-05 06:18:47.692079: val_loss -0.3258 
+2026-09-05 06:18:47.692154: Pseudo dice [np.float32(0.9565), np.float32(0.8006), np.float32(0.927), np.float32(0.8603)] 
+2026-09-05 06:18:47.692219: val classification accuracy 0.7812 
+2026-09-05 06:18:47.692368: val auc tensor(0.9453) 
+2026-09-05 06:18:47.692840: Epoch time: 75.2 s 
+2026-09-05 06:18:48.291913:  
+2026-09-05 06:18:48.292052: Epoch 80 
+2026-09-05 06:18:48.292144: Current learning rate: 0.00707 
+2026-09-05 06:20:03.782135: train_loss -0.365 
+2026-09-05 06:20:03.782334: val_loss -0.2574 
+2026-09-05 06:20:03.782408: Pseudo dice [np.float32(0.9667), np.float32(0.8729), np.float32(0.9225), np.float32(0.855)] 
+2026-09-05 06:20:03.782471: val classification accuracy 0.5625 
+2026-09-05 06:20:03.782626: val auc tensor(0.8125) 
+2026-09-05 06:20:03.783143: Epoch time: 75.49 s 
+2026-09-05 06:20:04.384894:  
+2026-09-05 06:20:04.385042: Epoch 81 
+2026-09-05 06:20:04.385142: Current learning rate: 0.00703 
+2026-09-05 06:21:18.129313: train_loss -0.3667 
+2026-09-05 06:21:18.129488: val_loss -0.286 
+2026-09-05 06:21:18.129562: Pseudo dice [np.float32(0.9506), np.float32(0.8236), np.float32(0.9217), np.float32(0.8852)] 
+2026-09-05 06:21:18.129633: val classification accuracy 0.7188 
+2026-09-05 06:21:18.129783: val auc tensor(0.9492) 
+2026-09-05 06:21:18.130276: Epoch time: 73.75 s 
+2026-09-05 06:21:18.725012:  
+2026-09-05 06:21:18.725134: Epoch 82 
+2026-09-05 06:21:18.725213: Current learning rate: 0.00699 
+2026-09-05 06:22:34.980950: train_loss -0.3663 
+2026-09-05 06:22:34.981149: val_loss -0.3017 
+2026-09-05 06:22:34.981220: Pseudo dice [np.float32(0.9392), np.float32(0.8573), np.float32(0.9238), np.float32(0.8604)] 
+2026-09-05 06:22:34.981282: val classification accuracy 0.75 
+2026-09-05 06:22:34.981621: val auc tensor(0.9180) 
+2026-09-05 06:22:34.982133: Epoch time: 76.26 s 
+2026-09-05 06:22:35.560190:  
+2026-09-05 06:22:35.560315: Epoch 83 
+2026-09-05 06:22:35.560395: Current learning rate: 0.00696 
+2026-09-05 06:23:51.707772: train_loss -0.376 
+2026-09-05 06:23:51.707946: val_loss -0.3056 
+2026-09-05 06:23:51.708019: Pseudo dice [np.float32(0.9589), np.float32(0.8151), np.float32(0.9352), np.float32(0.8729)] 
+2026-09-05 06:23:51.708092: val classification accuracy 0.6562 
+2026-09-05 06:23:51.708241: val auc tensor(0.8125) 
+2026-09-05 06:23:51.708710: Epoch time: 76.15 s 
+2026-09-05 06:23:52.293082:  
+2026-09-05 06:23:52.293216: Epoch 84 
+2026-09-05 06:23:52.293307: Current learning rate: 0.00692 
+2026-09-05 06:25:08.611028: train_loss -0.3707 
+2026-09-05 06:25:08.611227: val_loss -0.2873 
+2026-09-05 06:25:08.611302: Pseudo dice [np.float32(0.9637), np.float32(0.8171), np.float32(0.9312), np.float32(0.8717)] 
+2026-09-05 06:25:08.611365: val classification accuracy 0.6562 
+2026-09-05 06:25:08.611519: val auc tensor(0.8633) 
+2026-09-05 06:25:08.612017: Epoch time: 76.32 s 
+2026-09-05 06:25:09.233760:  
+2026-09-05 06:25:09.233897: Epoch 85 
+2026-09-05 06:25:09.233999: Current learning rate: 0.00688 
+2026-09-05 06:26:24.140929: train_loss -0.373 
+2026-09-05 06:26:24.141113: val_loss -0.2777 
+2026-09-05 06:26:24.141188: Pseudo dice [np.float32(0.9622), np.float32(0.7751), np.float32(0.9344), np.float32(0.872)] 
+2026-09-05 06:26:24.141253: val classification accuracy 0.7188 
+2026-09-05 06:26:24.141406: val auc tensor(0.9375) 
+2026-09-05 06:26:24.141876: Epoch time: 74.91 s 
+2026-09-05 06:26:24.719733:  
+2026-09-05 06:26:24.719843: Epoch 86 
+2026-09-05 06:26:24.719912: Current learning rate: 0.00684 
+2026-09-05 06:27:40.035150: train_loss -0.3736 
+2026-09-05 06:27:40.035352: val_loss -0.2552 
+2026-09-05 06:27:40.035428: Pseudo dice [np.float32(0.9608), np.float32(0.8291), np.float32(0.9297), np.float32(0.8758)] 
+2026-09-05 06:27:40.035494: val classification accuracy 0.5312 
+2026-09-05 06:27:40.035648: val auc tensor(0.9336) 
+2026-09-05 06:27:40.036163: Epoch time: 75.32 s 
+2026-09-05 06:27:40.616363:  
+2026-09-05 06:27:40.616484: Epoch 87 
+2026-09-05 06:27:40.616557: Current learning rate: 0.0068 
+2026-09-05 06:28:53.342556: train_loss -0.3746 
+2026-09-05 06:28:53.342729: val_loss -0.0567 
+2026-09-05 06:28:53.342801: Pseudo dice [np.float32(0.9518), np.float32(0.8631), np.float32(0.9048), np.float32(0.8666)] 
+2026-09-05 06:28:53.342862: val classification accuracy 0.5 
+2026-09-05 06:28:53.343014: val auc tensor(0.5195) 
+2026-09-05 06:28:53.343500: Epoch time: 72.73 s 
+2026-09-05 06:28:53.919264:  
+2026-09-05 06:28:53.919382: Epoch 88 
+2026-09-05 06:28:53.919453: Current learning rate: 0.00677 
+2026-09-05 06:30:08.980574: train_loss -0.3693 
+2026-09-05 06:30:08.980776: val_loss -0.2297 
+2026-09-05 06:30:08.980848: Pseudo dice [np.float32(0.9456), np.float32(0.8606), np.float32(0.9298), np.float32(0.8824)] 
+2026-09-05 06:30:08.980910: val classification accuracy 0.5 
+2026-09-05 06:30:08.981067: val auc tensor(0.8555) 
+2026-09-05 06:30:08.981567: Epoch time: 75.06 s 
+2026-09-05 06:30:09.984735:  
+2026-09-05 06:30:09.984849: Epoch 89 
+2026-09-05 06:30:09.984919: Current learning rate: 0.00673 
+2026-09-05 06:31:25.324516: train_loss -0.3756 
+2026-09-05 06:31:25.324700: val_loss -0.2954 
+2026-09-05 06:31:25.324775: Pseudo dice [np.float32(0.9542), np.float32(0.8182), np.float32(0.9379), np.float32(0.8755)] 
+2026-09-05 06:31:25.324846: val classification accuracy 0.625 
+2026-09-05 06:31:25.324994: val auc tensor(0.8438) 
+2026-09-05 06:31:25.325473: Epoch time: 75.34 s 
+2026-09-05 06:31:25.917468:  
+2026-09-05 06:31:25.917592: Epoch 90 
+2026-09-05 06:31:25.917674: Current learning rate: 0.00669 
+2026-09-05 06:32:42.156220: train_loss -0.368 
+2026-09-05 06:32:42.156429: val_loss -0.2453 
+2026-09-05 06:32:42.156505: Pseudo dice [np.float32(0.9642), np.float32(0.814), np.float32(0.9309), np.float32(0.8599)] 
+2026-09-05 06:32:42.156570: val classification accuracy 0.625 
+2026-09-05 06:32:42.156730: val auc tensor(0.7266) 
+2026-09-05 06:32:42.157244: Epoch time: 76.24 s 
+2026-09-05 06:32:42.741108:  
+2026-09-05 06:32:42.741230: Epoch 91 
+2026-09-05 06:32:42.741303: Current learning rate: 0.00665 
+2026-09-05 06:33:58.353812: train_loss -0.3795 
+2026-09-05 06:33:58.353979: val_loss -0.3101 
+2026-09-05 06:33:58.354065: Pseudo dice [np.float32(0.9642), np.float32(0.8547), np.float32(0.932), np.float32(0.8947)] 
+2026-09-05 06:33:58.354136: val classification accuracy 0.6562 
+2026-09-05 06:33:58.354279: val auc tensor(0.8672) 
+2026-09-05 06:33:58.354710: Epoch time: 75.61 s 
+2026-09-05 06:33:58.937724:  
+2026-09-05 06:33:58.937844: Epoch 92 
+2026-09-05 06:33:58.937914: Current learning rate: 0.00662 
+2026-09-05 06:35:16.305998: train_loss -0.3723 
+2026-09-05 06:35:16.306205: val_loss -0.3164 
+2026-09-05 06:35:16.306280: Pseudo dice [np.float32(0.9548), np.float32(0.8806), np.float32(0.9246), np.float32(0.8225)] 
+2026-09-05 06:35:16.306345: val classification accuracy 0.6562 
+2026-09-05 06:35:16.306498: val auc tensor(0.8164) 
+2026-09-05 06:35:16.307004: Epoch time: 77.37 s 
+2026-09-05 06:35:16.895447:  
+2026-09-05 06:35:16.895574: Epoch 93 
+2026-09-05 06:35:16.895649: Current learning rate: 0.00658 
+2026-09-05 06:36:31.438592: train_loss -0.3742 
+2026-09-05 06:36:31.438772: val_loss -0.291 
+2026-09-05 06:36:31.438845: Pseudo dice [np.float32(0.9693), np.float32(0.773), np.float32(0.9359), np.float32(0.8613)] 
+2026-09-05 06:36:31.438910: val classification accuracy 0.6562 
+2026-09-05 06:36:31.439065: val auc tensor(0.9102) 
+2026-09-05 06:36:31.439542: Epoch time: 74.54 s 
+2026-09-05 06:36:32.023669:  
+2026-09-05 06:36:32.023795: Epoch 94 
+2026-09-05 06:36:32.023866: Current learning rate: 0.00654 
+2026-09-05 06:37:47.353335: train_loss -0.3762 
+2026-09-05 06:37:47.353532: val_loss -0.2786 
+2026-09-05 06:37:47.353606: Pseudo dice [np.float32(0.9569), np.float32(0.8368), np.float32(0.9303), np.float32(0.8691)] 
+2026-09-05 06:37:47.353671: val classification accuracy 0.6562 
+2026-09-05 06:37:47.353823: val auc tensor(0.7539) 
+2026-09-05 06:37:47.354347: Epoch time: 75.33 s 
+2026-09-05 06:37:47.937960:  
+2026-09-05 06:37:47.938087: Epoch 95 
+2026-09-05 06:37:47.938166: Current learning rate: 0.0065 
+2026-09-05 06:39:03.981039: train_loss -0.3817 
+2026-09-05 06:39:03.981219: val_loss -0.2499 
+2026-09-05 06:39:03.981293: Pseudo dice [np.float32(0.9517), np.float32(0.8676), np.float32(0.9301), np.float32(0.8806)] 
+2026-09-05 06:39:03.981363: val classification accuracy 0.7188 
+2026-09-05 06:39:03.981517: val auc tensor(0.9219) 
+2026-09-05 06:39:03.981992: Epoch time: 76.04 s 
+2026-09-05 06:39:04.564476:  
+2026-09-05 06:39:04.564603: Epoch 96 
+2026-09-05 06:39:04.564679: Current learning rate: 0.00647 
+2026-09-05 06:40:19.166259: train_loss -0.3546 
+2026-09-05 06:40:19.166459: val_loss -0.2745 
+2026-09-05 06:40:19.166534: Pseudo dice [np.float32(0.9499), np.float32(0.8505), np.float32(0.9308), np.float32(0.8343)] 
+2026-09-05 06:40:19.166600: val classification accuracy 0.5 
+2026-09-05 06:40:19.166756: val auc tensor(0.8047) 
+2026-09-05 06:40:19.167277: Epoch time: 74.6 s 
+2026-09-05 06:40:19.754586:  
+2026-09-05 06:40:19.754715: Epoch 97 
+2026-09-05 06:40:19.754789: Current learning rate: 0.00643 
+2026-09-05 06:41:32.666218: train_loss -0.362 
+2026-09-05 06:41:32.666416: val_loss -0.2395 
+2026-09-05 06:41:32.666492: Pseudo dice [np.float32(0.9651), np.float32(0.7842), np.float32(0.9267), np.float32(0.8598)] 
+2026-09-05 06:41:32.666558: val classification accuracy 0.5625 
+2026-09-05 06:41:32.666722: val auc tensor(0.6367) 
+2026-09-05 06:41:32.667244: Epoch time: 72.91 s 
+2026-09-05 06:41:33.252439:  
+2026-09-05 06:41:33.252564: Epoch 98 
+2026-09-05 06:41:33.252640: Current learning rate: 0.00639 
+2026-09-05 06:42:49.189778: train_loss -0.37 
+2026-09-05 06:42:49.189980: val_loss -0.2973 
+2026-09-05 06:42:49.190062: Pseudo dice [np.float32(0.9609), np.float32(0.9007), np.float32(0.9329), np.float32(0.8891)] 
+2026-09-05 06:42:49.190130: val classification accuracy 0.6562 
+2026-09-05 06:42:49.190284: val auc tensor(0.8281) 
+2026-09-05 06:42:49.190792: Epoch time: 75.94 s 
+2026-09-05 06:42:49.777020:  
+2026-09-05 06:42:49.777145: Epoch 99 
+2026-09-05 06:42:49.777216: Current learning rate: 0.00635 
+2026-09-05 06:44:05.659359: train_loss -0.3748 
+2026-09-05 06:44:05.659539: val_loss -0.2318 
+2026-09-05 06:44:05.659612: Pseudo dice [np.float32(0.9324), np.float32(0.8633), np.float32(0.9294), np.float32(0.8344)] 
+2026-09-05 06:44:05.659676: val classification accuracy 0.5312 
+2026-09-05 06:44:05.659823: val auc tensor(0.8711) 
+2026-09-05 06:44:05.660306: Epoch time: 75.88 s 
+2026-09-05 06:44:06.484087:  
+2026-09-05 06:44:06.484217: Epoch 100 
+2026-09-05 06:44:06.484291: Current learning rate: 0.00631 
+2026-09-05 06:45:21.777930: train_loss -0.3669 
+2026-09-05 06:45:21.778128: val_loss -0.2432 
+2026-09-05 06:45:21.778205: Pseudo dice [np.float32(0.9558), np.float32(0.8763), np.float32(0.9445), np.float32(0.8954)] 
+2026-09-05 06:45:21.778272: val classification accuracy 0.625 
+2026-09-05 06:45:21.778426: val auc tensor(0.7539) 
+2026-09-05 06:45:21.778928: Epoch time: 75.29 s 
+2026-09-05 06:45:22.365055:  
+2026-09-05 06:45:22.365172: Epoch 101 
+2026-09-05 06:45:22.365254: Current learning rate: 0.00628 
+2026-09-05 06:46:37.049667: train_loss -0.3701 
+2026-09-05 06:46:37.049859: val_loss -0.2481 
+2026-09-05 06:46:37.049932: Pseudo dice [np.float32(0.9552), np.float32(0.8671), np.float32(0.9369), np.float32(0.8781)] 
+2026-09-05 06:46:37.049998: val classification accuracy 0.5312 
+2026-09-05 06:46:37.050159: val auc tensor(0.8242) 
+2026-09-05 06:46:37.050670: Epoch time: 74.69 s 
+2026-09-05 06:46:37.685658:  
+2026-09-05 06:46:37.685796: Epoch 102 
+2026-09-05 06:46:37.685900: Current learning rate: 0.00624 
+2026-09-05 06:47:53.440788: train_loss -0.3723 
+2026-09-05 06:47:53.440980: val_loss -0.1152 
+2026-09-05 06:47:53.441057: Pseudo dice [np.float32(0.9542), np.float32(0.8904), np.float32(0.9008), np.float32(0.842)] 
+2026-09-05 06:47:53.441122: val classification accuracy 0.5312 
+2026-09-05 06:47:53.441275: val auc tensor(0.7852) 
+2026-09-05 06:47:53.441775: Epoch time: 75.76 s 
+2026-09-05 06:47:54.029839:  
+2026-09-05 06:47:54.029963: Epoch 103 
+2026-09-05 06:47:54.030041: Current learning rate: 0.0062 
+2026-09-05 06:49:10.114225: train_loss -0.3529 
+2026-09-05 06:49:10.114418: val_loss -0.315 
+2026-09-05 06:49:10.114491: Pseudo dice [np.float32(0.9407), np.float32(0.8223), np.float32(0.93), np.float32(0.8879)] 
+2026-09-05 06:49:10.114555: val classification accuracy 0.7188 
+2026-09-05 06:49:10.114704: val auc tensor(0.9609) 
+2026-09-05 06:49:10.115233: Epoch time: 76.09 s 
+2026-09-05 06:49:10.702650:  
+2026-09-05 06:49:10.702774: Epoch 104 
+2026-09-05 06:49:10.702846: Current learning rate: 0.00616 
+2026-09-05 06:50:25.746772: train_loss -0.3698 
+2026-09-05 06:50:25.746971: val_loss -0.322 
+2026-09-05 06:50:25.747051: Pseudo dice [np.float32(0.965), np.float32(0.8777), np.float32(0.9222), np.float32(0.8664)] 
+2026-09-05 06:50:25.747118: val classification accuracy 0.8125 
+2026-09-05 06:50:25.747270: val auc tensor(0.9531) 
+2026-09-05 06:50:25.747772: Epoch time: 75.05 s 
+2026-09-05 06:50:26.345910:  
+2026-09-05 06:50:26.346051: Epoch 105 
+2026-09-05 06:50:26.346144: Current learning rate: 0.00612 
+2026-09-05 06:51:43.764098: train_loss -0.3815 
+2026-09-05 06:51:43.764282: val_loss -0.2621 
+2026-09-05 06:51:43.764353: Pseudo dice [np.float32(0.9492), np.float32(0.8071), np.float32(0.9366), np.float32(0.8784)] 
+2026-09-05 06:51:43.764417: val classification accuracy 0.6875 
+2026-09-05 06:51:43.764573: val auc tensor(0.8633) 
+2026-09-05 06:51:43.765037: Epoch time: 77.42 s 
+2026-09-05 06:51:44.367788:  
+2026-09-05 06:51:44.367933: Epoch 106 
+2026-09-05 06:51:44.368014: Current learning rate: 0.00609 
+2026-09-05 06:52:59.934770: train_loss -0.3813 
+2026-09-05 06:52:59.934968: val_loss -0.1882 
+2026-09-05 06:52:59.935051: Pseudo dice [np.float32(0.9663), np.float32(0.8806), np.float32(0.9083), np.float32(0.8715)] 
+2026-09-05 06:52:59.935119: val classification accuracy 0.6562 
+2026-09-05 06:52:59.935274: val auc tensor(0.8164) 
+2026-09-05 06:52:59.935787: Epoch time: 75.57 s 
+2026-09-05 06:53:00.534008:  
+2026-09-05 06:53:00.534143: Epoch 107 
+2026-09-05 06:53:00.534218: Current learning rate: 0.00605 
+2026-09-05 06:54:17.020673: train_loss -0.3783 
+2026-09-05 06:54:17.020847: val_loss -0.3058 
+2026-09-05 06:54:17.020919: Pseudo dice [np.float32(0.9668), np.float32(0.8777), np.float32(0.9425), np.float32(0.8785)] 
+2026-09-05 06:54:17.020985: val classification accuracy 0.6562 
+2026-09-05 06:54:17.021136: val auc tensor(0.8828) 
+2026-09-05 06:54:17.021614: Epoch time: 76.49 s 
+2026-09-05 06:54:17.618052:  
+2026-09-05 06:54:17.618181: Epoch 108 
+2026-09-05 06:54:17.618266: Current learning rate: 0.00601 
+2026-09-05 06:55:33.377745: train_loss -0.3662 
+2026-09-05 06:55:33.377942: val_loss -0.2549 
+2026-09-05 06:55:33.378015: Pseudo dice [np.float32(0.9558), np.float32(0.8013), np.float32(0.913), np.float32(0.8232)] 
+2026-09-05 06:55:33.378086: val classification accuracy 0.5938 
+2026-09-05 06:55:33.378242: val auc tensor(0.7227) 
+2026-09-05 06:55:33.378741: Epoch time: 75.76 s 
+2026-09-05 06:55:33.970106:  
+2026-09-05 06:55:33.970224: Epoch 109 
+2026-09-05 06:55:33.970293: Current learning rate: 0.00597 
+2026-09-05 06:56:49.850387: train_loss -0.3762 
+2026-09-05 06:56:49.850548: val_loss -0.342 
+2026-09-05 06:56:49.850620: Pseudo dice [np.float32(0.9653), np.float32(0.8155), np.float32(0.9331), np.float32(0.8743)] 
+2026-09-05 06:56:49.850684: val classification accuracy 0.9062 
+2026-09-05 06:56:49.850826: val auc tensor(0.9570) 
+2026-09-05 06:56:49.851266: Epoch time: 75.88 s 
+2026-09-05 06:56:50.442254:  
+2026-09-05 06:56:50.442379: Epoch 110 
+2026-09-05 06:56:50.442452: Current learning rate: 0.00593 
+2026-09-05 06:58:06.311574: train_loss -0.3548 
+2026-09-05 06:58:06.311779: val_loss -0.2934 
+2026-09-05 06:58:06.311854: Pseudo dice [np.float32(0.9543), np.float32(0.8051), np.float32(0.917), np.float32(0.887)] 
+2026-09-05 06:58:06.311921: val classification accuracy 0.5625 
+2026-09-05 06:58:06.312086: val auc tensor(0.9258) 
+2026-09-05 06:58:06.312597: Epoch time: 75.87 s 
+2026-09-05 06:58:06.903738:  
+2026-09-05 06:58:06.903862: Epoch 111 
+2026-09-05 06:58:06.903944: Current learning rate: 0.0059 
+2026-09-05 06:59:21.540145: train_loss -0.3683 
+2026-09-05 06:59:21.540302: val_loss -0.3189 
+2026-09-05 06:59:21.540376: Pseudo dice [np.float32(0.9682), np.float32(0.8795), np.float32(0.9319), np.float32(0.8929)] 
+2026-09-05 06:59:21.540445: val classification accuracy 0.7188 
+2026-09-05 06:59:21.540589: val auc tensor(0.8340) 
+2026-09-05 06:59:21.541021: Epoch time: 74.64 s 
+2026-09-05 06:59:22.121453:  
+2026-09-05 06:59:22.121579: Epoch 112 
+2026-09-05 06:59:22.121658: Current learning rate: 0.00586 
+2026-09-05 07:00:37.771365: train_loss -0.3745 
+2026-09-05 07:00:37.771521: val_loss -0.2851 
+2026-09-05 07:00:37.771594: Pseudo dice [np.float32(0.9445), np.float32(0.8395), np.float32(0.9284), np.float32(0.8865)] 
+2026-09-05 07:00:37.771659: val classification accuracy 0.625 
+2026-09-05 07:00:37.771805: val auc tensor(0.9023) 
+2026-09-05 07:00:37.772287: Epoch time: 75.65 s 
+2026-09-05 07:00:38.359248:  
+2026-09-05 07:00:38.359374: Epoch 113 
+2026-09-05 07:00:38.359452: Current learning rate: 0.00582 
+2026-09-05 07:01:53.578056: train_loss -0.3785 
+2026-09-05 07:01:53.578208: val_loss -0.2937 
+2026-09-05 07:01:53.578278: Pseudo dice [np.float32(0.962), np.float32(0.8463), np.float32(0.9202), np.float32(0.881)] 
+2026-09-05 07:01:53.578343: val classification accuracy 0.625 
+2026-09-05 07:01:53.578486: val auc tensor(0.7969) 
+2026-09-05 07:01:53.578933: Epoch time: 75.22 s 
+2026-09-05 07:01:54.158943:  
+2026-09-05 07:01:54.159072: Epoch 114 
+2026-09-05 07:01:54.159148: Current learning rate: 0.00578 
+2026-09-05 07:03:10.381542: train_loss -0.3672 
+2026-09-05 07:03:10.381700: val_loss -0.3481 
+2026-09-05 07:03:10.381772: Pseudo dice [np.float32(0.9652), np.float32(0.8827), np.float32(0.9357), np.float32(0.8664)] 
+2026-09-05 07:03:10.381836: val classification accuracy 0.875 
+2026-09-05 07:03:10.381978: val auc tensor(0.9336) 
+2026-09-05 07:03:10.382423: Epoch time: 76.22 s 
+2026-09-05 07:03:10.962087:  
+2026-09-05 07:03:10.962209: Epoch 115 
+2026-09-05 07:03:10.962282: Current learning rate: 0.00574 
+2026-09-05 07:04:26.290681: train_loss -0.3757 
+2026-09-05 07:04:26.290841: val_loss -0.347 
+2026-09-05 07:04:26.290914: Pseudo dice [np.float32(0.965), np.float32(0.8874), np.float32(0.9485), np.float32(0.8789)] 
+2026-09-05 07:04:26.291101: val classification accuracy 0.875 
+2026-09-05 07:04:26.291252: val auc tensor(0.9727) 
+2026-09-05 07:04:26.291682: Epoch time: 75.33 s 
+2026-09-05 07:04:26.885710:  
+2026-09-05 07:04:26.885819: Epoch 116 
+2026-09-05 07:04:26.885889: Current learning rate: 0.0057 
+2026-09-05 07:05:42.813432: train_loss -0.3751 
+2026-09-05 07:05:42.813615: val_loss -0.3358 
+2026-09-05 07:05:42.813688: Pseudo dice [np.float32(0.9644), np.float32(0.8749), np.float32(0.9356), np.float32(0.8642)] 
+2026-09-05 07:05:42.813753: val classification accuracy 0.875 
+2026-09-05 07:05:42.813898: val auc tensor(0.9727) 
+2026-09-05 07:05:42.814355: Epoch time: 75.93 s 
+2026-09-05 07:05:43.401817:  
+2026-09-05 07:05:43.401951: Epoch 117 
+2026-09-05 07:05:43.402045: Current learning rate: 0.00567 
+2026-09-05 07:06:59.515630: train_loss -0.3649 
+2026-09-05 07:06:59.515828: val_loss -0.2857 
+2026-09-05 07:06:59.515901: Pseudo dice [np.float32(0.9419), np.float32(0.8376), np.float32(0.927), np.float32(0.8937)] 
+2026-09-05 07:06:59.515966: val classification accuracy 0.5 
+2026-09-05 07:06:59.516125: val auc tensor(0.8945) 
+2026-09-05 07:06:59.516628: Epoch time: 76.11 s 
+2026-09-05 07:07:00.103113:  
+2026-09-05 07:07:00.103238: Epoch 118 
+2026-09-05 07:07:00.103317: Current learning rate: 0.00563 
+2026-09-05 07:08:15.270376: train_loss -0.3675 
+2026-09-05 07:08:15.270570: val_loss -0.2979 
+2026-09-05 07:08:15.270652: Pseudo dice [np.float32(0.9608), np.float32(0.8615), np.float32(0.9383), np.float32(0.8451)] 
+2026-09-05 07:08:15.270723: val classification accuracy 0.6562 
+2026-09-05 07:08:15.270878: val auc tensor(0.9395) 
+2026-09-05 07:08:15.271376: Epoch time: 75.17 s 
+2026-09-05 07:08:15.856101:  
+2026-09-05 07:08:15.856216: Epoch 119 
+2026-09-05 07:08:15.856288: Current learning rate: 0.00559 
+2026-09-05 07:09:28.475498: train_loss -0.3783 
+2026-09-05 07:09:28.475696: val_loss -0.2264 
+2026-09-05 07:09:28.475772: Pseudo dice [np.float32(0.9641), np.float32(0.8593), np.float32(0.9287), np.float32(0.8844)] 
+2026-09-05 07:09:28.475833: val classification accuracy 0.5625 
+2026-09-05 07:09:28.475981: val auc tensor(0.9141) 
+2026-09-05 07:09:28.476481: Epoch time: 72.62 s 
+2026-09-05 07:09:29.062386:  
+2026-09-05 07:09:29.062530: Epoch 120 
+2026-09-05 07:09:29.062606: Current learning rate: 0.00555 
+2026-09-05 07:10:44.636488: train_loss -0.3791 
+2026-09-05 07:10:44.636681: val_loss -0.3257 
+2026-09-05 07:10:44.636756: Pseudo dice [np.float32(0.964), np.float32(0.8497), np.float32(0.9273), np.float32(0.8768)] 
+2026-09-05 07:10:44.636820: val classification accuracy 0.5625 
+2026-09-05 07:10:44.636970: val auc tensor(0.9727) 
+2026-09-05 07:10:44.637481: Epoch time: 75.58 s 
+2026-09-05 07:10:45.224706:  
+2026-09-05 07:10:45.224837: Epoch 121 
+2026-09-05 07:10:45.224924: Current learning rate: 0.00551 
+2026-09-05 07:12:01.464418: train_loss -0.3805 
+2026-09-05 07:12:01.464602: val_loss -0.3089 
+2026-09-05 07:12:01.464678: Pseudo dice [np.float32(0.9635), np.float32(0.8741), np.float32(0.9281), np.float32(0.8789)] 
+2026-09-05 07:12:01.464743: val classification accuracy 0.5625 
+2026-09-05 07:12:01.464892: val auc tensor(0.9180) 
+2026-09-05 07:12:01.465460: Epoch time: 76.24 s 
+2026-09-05 07:12:02.059395:  
+2026-09-05 07:12:02.059542: Epoch 122 
+2026-09-05 07:12:02.059639: Current learning rate: 0.00547 
+2026-09-05 07:13:16.490736: train_loss -0.379 
+2026-09-05 07:13:16.490922: val_loss -0.2641 
+2026-09-05 07:13:16.490998: Pseudo dice [np.float32(0.9701), np.float32(0.8225), np.float32(0.9443), np.float32(0.851)] 
+2026-09-05 07:13:16.491070: val classification accuracy 0.6562 
+2026-09-05 07:13:16.491225: val auc tensor(0.8203) 
+2026-09-05 07:13:16.491697: Epoch time: 74.43 s 
+2026-09-05 07:13:17.091283:  
+2026-09-05 07:13:17.091440: Epoch 123 
+2026-09-05 07:13:17.091538: Current learning rate: 0.00544 
+2026-09-05 07:14:32.266006: train_loss -0.3789 
+2026-09-05 07:14:32.266217: val_loss -0.2936 
+2026-09-05 07:14:32.266290: Pseudo dice [np.float32(0.9626), np.float32(0.8836), np.float32(0.9407), np.float32(0.8801)] 
+2026-09-05 07:14:32.266354: val classification accuracy 0.6875 
+2026-09-05 07:14:32.266511: val auc tensor(0.9531) 
+2026-09-05 07:14:32.267020: Epoch time: 75.18 s 
+2026-09-05 07:14:32.859540:  
+2026-09-05 07:14:32.859672: Epoch 124 
+2026-09-05 07:14:32.859745: Current learning rate: 0.0054 
+2026-09-05 07:15:48.973367: train_loss -0.374 
+2026-09-05 07:15:48.973857: val_loss -0.2854 
+2026-09-05 07:15:48.973977: Pseudo dice [np.float32(0.9585), np.float32(0.8629), np.float32(0.9262), np.float32(0.876)] 
+2026-09-05 07:15:48.974080: val classification accuracy 0.5625 
+2026-09-05 07:15:48.974351: val auc tensor(0.9141) 
+2026-09-05 07:15:48.975421: Epoch time: 76.11 s 
+2026-09-05 07:15:49.565745:  
+2026-09-05 07:15:49.565876: Epoch 125 
+2026-09-05 07:15:49.565954: Current learning rate: 0.00536 
+2026-09-05 07:17:06.024466: train_loss -0.3803 
+2026-09-05 07:17:06.024661: val_loss -0.2269 
+2026-09-05 07:17:06.024736: Pseudo dice [np.float32(0.9697), np.float32(0.8414), np.float32(0.9382), np.float32(0.8824)] 
+2026-09-05 07:17:06.024801: val classification accuracy 0.5 
+2026-09-05 07:17:06.024954: val auc tensor(0.8906) 
+2026-09-05 07:17:06.025476: Epoch time: 76.46 s 
+2026-09-05 07:17:06.615252:  
+2026-09-05 07:17:06.615376: Epoch 126 
+2026-09-05 07:17:06.615461: Current learning rate: 0.00532 
+2026-09-05 07:18:21.630579: train_loss -0.3834 
+2026-09-05 07:18:21.630744: val_loss -0.2502 
+2026-09-05 07:18:21.630819: Pseudo dice [np.float32(0.9619), np.float32(0.837), np.float32(0.9187), np.float32(0.8752)] 
+2026-09-05 07:18:21.630883: val classification accuracy 0.625 
+2026-09-05 07:18:21.631023: val auc tensor(0.9453) 
+2026-09-05 07:18:21.631471: Epoch time: 75.02 s 
+2026-09-05 07:18:22.256890:  
+2026-09-05 07:18:22.257041: Epoch 127 
+2026-09-05 07:18:22.257143: Current learning rate: 0.00528 
+2026-09-05 07:19:37.295536: train_loss -0.3847 
+2026-09-05 07:19:37.295739: val_loss -0.2735 
+2026-09-05 07:19:37.295814: Pseudo dice [np.float32(0.9607), np.float32(0.9023), np.float32(0.9399), np.float32(0.8831)] 
+2026-09-05 07:19:37.295883: val classification accuracy 0.75 
+2026-09-05 07:19:37.296045: val auc tensor(0.8828) 
+2026-09-05 07:19:37.296553: Epoch time: 75.04 s 
+2026-09-05 07:19:37.887447:  
+2026-09-05 07:19:37.887566: Epoch 128 
+2026-09-05 07:19:37.887636: Current learning rate: 0.00524 
+2026-09-05 07:20:53.075943: train_loss -0.3839 
+2026-09-05 07:20:53.076120: val_loss -0.2546 
+2026-09-05 07:20:53.076195: Pseudo dice [np.float32(0.9529), np.float32(0.8818), np.float32(0.9453), np.float32(0.8837)] 
+2026-09-05 07:20:53.076261: val classification accuracy 0.6562 
+2026-09-05 07:20:53.076412: val auc tensor(0.9375) 
+2026-09-05 07:20:53.076877: Epoch time: 75.19 s 
+2026-09-05 07:20:53.663290:  
+2026-09-05 07:20:53.663418: Epoch 129 
+2026-09-05 07:20:53.663491: Current learning rate: 0.0052 
+2026-09-05 07:22:08.377051: train_loss -0.3862 
+2026-09-05 07:22:08.377244: val_loss -0.2632 
+2026-09-05 07:22:08.377321: Pseudo dice [np.float32(0.953), np.float32(0.847), np.float32(0.9454), np.float32(0.8889)] 
+2026-09-05 07:22:08.377386: val classification accuracy 0.625 
+2026-09-05 07:22:08.377536: val auc tensor(0.9453) 
+2026-09-05 07:22:08.378043: Epoch time: 74.71 s 
+2026-09-05 07:22:08.966525:  
+2026-09-05 07:22:08.966645: Epoch 130 
+2026-09-05 07:22:08.966715: Current learning rate: 0.00517 
+2026-09-05 07:23:23.510670: train_loss -0.3838 
+2026-09-05 07:23:23.510852: val_loss -0.2421 
+2026-09-05 07:23:23.510923: Pseudo dice [np.float32(0.952), np.float32(0.8449), np.float32(0.9423), np.float32(0.8841)] 
+2026-09-05 07:23:23.510990: val classification accuracy 0.7188 
+2026-09-05 07:23:23.511149: val auc tensor(0.8594) 
+2026-09-05 07:23:23.511617: Epoch time: 74.55 s 
+2026-09-05 07:23:24.100693:  
+2026-09-05 07:23:24.100816: Epoch 131 
+2026-09-05 07:23:24.100888: Current learning rate: 0.00513 
+2026-09-05 07:24:39.634828: train_loss -0.3833 
+2026-09-05 07:24:39.635031: val_loss -0.2431 
+2026-09-05 07:24:39.635107: Pseudo dice [np.float32(0.9675), np.float32(0.8706), np.float32(0.9406), np.float32(0.8861)] 
+2026-09-05 07:24:39.635175: val classification accuracy 0.5625 
+2026-09-05 07:24:39.635328: val auc tensor(0.8008) 
+2026-09-05 07:24:39.635822: Epoch time: 75.54 s 
+2026-09-05 07:24:40.232713:  
+2026-09-05 07:24:40.232836: Epoch 132 
+2026-09-05 07:24:40.233092: Current learning rate: 0.00509 
+2026-09-05 07:25:55.220178: train_loss -0.3843 
+2026-09-05 07:25:55.220361: val_loss -0.247 
+2026-09-05 07:25:55.220433: Pseudo dice [np.float32(0.9623), np.float32(0.8301), np.float32(0.9488), np.float32(0.8924)] 
+2026-09-05 07:25:55.220497: val classification accuracy 0.6875 
+2026-09-05 07:25:55.220640: val auc tensor(0.8281) 
+2026-09-05 07:25:55.221114: Epoch time: 74.99 s 
+2026-09-05 07:25:55.815638:  
+2026-09-05 07:25:55.815792: Epoch 133 
+2026-09-05 07:25:55.815872: Current learning rate: 0.00505 
+2026-09-05 07:27:10.249363: train_loss -0.3823 
+2026-09-05 07:27:10.249541: val_loss -0.2822 
+2026-09-05 07:27:10.249616: Pseudo dice [np.float32(0.961), np.float32(0.8924), np.float32(0.9355), np.float32(0.8759)] 
+2026-09-05 07:27:10.249677: val classification accuracy 0.6562 
+2026-09-05 07:27:10.249829: val auc tensor(0.9453) 
+2026-09-05 07:27:10.250336: Epoch time: 74.43 s 
+2026-09-05 07:27:10.840430:  
+2026-09-05 07:27:10.840546: Epoch 134 
+2026-09-05 07:27:10.840616: Current learning rate: 0.00501 
+2026-09-05 07:28:26.326761: train_loss -0.3877 
+2026-09-05 07:28:26.326936: val_loss -0.2421 
+2026-09-05 07:28:26.327011: Pseudo dice [np.float32(0.966), np.float32(0.8898), np.float32(0.9377), np.float32(0.8628)] 
+2026-09-05 07:28:26.327086: val classification accuracy 0.5938 
+2026-09-05 07:28:26.327233: val auc tensor(0.8359) 
+2026-09-05 07:28:26.327670: Epoch time: 75.49 s 
+2026-09-05 07:28:26.944544:  
+2026-09-05 07:28:26.944669: Epoch 135 
+2026-09-05 07:28:26.944758: Current learning rate: 0.00497 
+2026-09-05 07:29:41.278255: train_loss -0.3861 
+2026-09-05 07:29:41.278456: val_loss -0.1769 
+2026-09-05 07:29:41.278532: Pseudo dice [np.float32(0.948), np.float32(0.8104), np.float32(0.9363), np.float32(0.8945)] 
+2026-09-05 07:29:41.278594: val classification accuracy 0.5312 
+2026-09-05 07:29:41.278747: val auc tensor(0.7070) 
+2026-09-05 07:29:41.279272: Epoch time: 74.33 s 
+2026-09-05 07:29:41.874309:  
+2026-09-05 07:29:41.874467: Epoch 136 
+2026-09-05 07:29:41.874543: Current learning rate: 0.00493 
+2026-09-05 07:30:56.485963: train_loss -0.3874 
+2026-09-05 07:30:56.486151: val_loss -0.2719 
+2026-09-05 07:30:56.486224: Pseudo dice [np.float32(0.9594), np.float32(0.8945), np.float32(0.9466), np.float32(0.8732)] 
+2026-09-05 07:30:56.486285: val classification accuracy 0.5938 
+2026-09-05 07:30:56.486439: val auc tensor(0.8633) 
+2026-09-05 07:30:56.486938: Epoch time: 74.61 s 
+2026-09-05 07:30:57.140153:  
+2026-09-05 07:30:57.140282: Epoch 137 
+2026-09-05 07:30:57.140358: Current learning rate: 0.00489 
+2026-09-05 07:32:14.830084: train_loss -0.3852 
+2026-09-05 07:32:14.830251: val_loss -0.2749 
+2026-09-05 07:32:14.830321: Pseudo dice [np.float32(0.9624), np.float32(0.8363), np.float32(0.9415), np.float32(0.8869)] 
+2026-09-05 07:32:14.830383: val classification accuracy 0.6562 
+2026-09-05 07:32:14.830526: val auc tensor(0.8125) 
+2026-09-05 07:32:14.830970: Epoch time: 77.69 s 
+2026-09-05 07:32:15.432911:  
+2026-09-05 07:32:15.433047: Epoch 138 
+2026-09-05 07:32:15.433125: Current learning rate: 0.00485 
+2026-09-05 07:33:29.950772: train_loss -0.3839 
+2026-09-05 07:33:29.950970: val_loss -0.312 
+2026-09-05 07:33:29.951050: Pseudo dice [np.float32(0.9508), np.float32(0.8543), np.float32(0.9281), np.float32(0.8936)] 
+2026-09-05 07:33:29.951112: val classification accuracy 0.6875 
+2026-09-05 07:33:29.951265: val auc tensor(0.9258) 
+2026-09-05 07:33:29.951786: Epoch time: 74.52 s 
+2026-09-05 07:33:30.560019:  
+2026-09-05 07:33:30.560146: Epoch 139 
+2026-09-05 07:33:30.560231: Current learning rate: 0.00482 
+2026-09-05 07:34:46.566342: train_loss -0.3888 
+2026-09-05 07:34:46.566519: val_loss -0.3211 
+2026-09-05 07:34:46.566595: Pseudo dice [np.float32(0.9638), np.float32(0.8934), np.float32(0.9387), np.float32(0.8972)] 
+2026-09-05 07:34:46.566660: val classification accuracy 0.6562 
+2026-09-05 07:34:46.566813: val auc tensor(0.8359) 
+2026-09-05 07:34:46.567302: Epoch time: 76.01 s 
+2026-09-05 07:34:47.165560:  
+2026-09-05 07:34:47.165679: Epoch 140 
+2026-09-05 07:34:47.165757: Current learning rate: 0.00478 
+2026-09-05 07:36:03.880842: train_loss -0.3948 
+2026-09-05 07:36:03.881017: val_loss -0.306 
+2026-09-05 07:36:03.881101: Pseudo dice [np.float32(0.9583), np.float32(0.8925), np.float32(0.9359), np.float32(0.8771)] 
+2026-09-05 07:36:03.881169: val classification accuracy 0.6875 
+2026-09-05 07:36:03.881321: val auc tensor(0.9297) 
+2026-09-05 07:36:03.881794: Epoch time: 76.72 s 
+2026-09-05 07:36:04.522496:  
+2026-09-05 07:36:04.522648: Epoch 141 
+2026-09-05 07:36:04.522761: Current learning rate: 0.00474 
+2026-09-05 07:37:19.882403: train_loss -0.3901 
+2026-09-05 07:37:19.882601: val_loss -0.319 
+2026-09-05 07:37:19.882670: Pseudo dice [np.float32(0.9695), np.float32(0.8609), np.float32(0.9378), np.float32(0.8906)] 
+2026-09-05 07:37:19.882734: val classification accuracy 0.75 
+2026-09-05 07:37:19.882884: val auc tensor(0.9023) 
+2026-09-05 07:37:19.883396: Epoch time: 75.36 s 
+2026-09-05 07:37:20.483436:  
+2026-09-05 07:37:20.483570: Epoch 142 
+2026-09-05 07:37:20.483648: Current learning rate: 0.0047 
+2026-09-05 07:38:35.455106: train_loss -0.3909 
+2026-09-05 07:38:35.455289: val_loss -0.2936 
+2026-09-05 07:38:35.455365: Pseudo dice [np.float32(0.9572), np.float32(0.8558), np.float32(0.9445), np.float32(0.8649)] 
+2026-09-05 07:38:35.455432: val classification accuracy 0.75 
+2026-09-05 07:38:35.455582: val auc tensor(0.8867) 
+2026-09-05 07:38:35.456068: Epoch time: 74.97 s 
+2026-09-05 07:38:36.050928:  
+2026-09-05 07:38:36.051053: Epoch 143 
+2026-09-05 07:38:36.051126: Current learning rate: 0.00466 
+2026-09-05 07:39:51.674513: train_loss -0.3936 
+2026-09-05 07:39:51.674708: val_loss -0.2978 
+2026-09-05 07:39:51.674782: Pseudo dice [np.float32(0.9662), np.float32(0.8786), np.float32(0.9391), np.float32(0.8883)] 
+2026-09-05 07:39:51.674846: val classification accuracy 0.7188 
+2026-09-05 07:39:51.674998: val auc tensor(0.8945) 
+2026-09-05 07:39:51.675507: Epoch time: 75.62 s 
+2026-09-05 07:39:52.271839:  
+2026-09-05 07:39:52.271967: Epoch 144 
+2026-09-05 07:39:52.272049: Current learning rate: 0.00462 
+2026-09-05 07:41:07.001754: train_loss -0.3932 
+2026-09-05 07:41:07.001903: val_loss -0.3201 
+2026-09-05 07:41:07.001977: Pseudo dice [np.float32(0.9543), np.float32(0.8851), np.float32(0.9247), np.float32(0.8872)] 
+2026-09-05 07:41:07.002048: val classification accuracy 0.6875 
+2026-09-05 07:41:07.002196: val auc tensor(0.9375) 
+2026-09-05 07:41:07.002632: Epoch time: 74.73 s 
+2026-09-05 07:41:07.596097:  
+2026-09-05 07:41:07.596225: Epoch 145 
+2026-09-05 07:41:07.596301: Current learning rate: 0.00458 
+2026-09-05 07:42:22.699785: train_loss -0.3847 
+2026-09-05 07:42:22.699978: val_loss -0.3666 
+2026-09-05 07:42:22.700058: Pseudo dice [np.float32(0.9651), np.float32(0.8916), np.float32(0.9413), np.float32(0.88)] 
+2026-09-05 07:42:22.700126: val classification accuracy 0.7812 
+2026-09-05 07:42:22.700281: val auc tensor(0.9688) 
+2026-09-05 07:42:22.700783: Epoch time: 75.1 s 
+2026-09-05 07:42:23.296183:  
+2026-09-05 07:42:23.296320: Epoch 146 
+2026-09-05 07:42:23.296401: Current learning rate: 0.00454 
+2026-09-05 07:43:37.640794: train_loss -0.3905 
+2026-09-05 07:43:37.640977: val_loss -0.3205 
+2026-09-05 07:43:37.641056: Pseudo dice [np.float32(0.9724), np.float32(0.8954), np.float32(0.9279), np.float32(0.885)] 
+2026-09-05 07:43:37.641124: val classification accuracy 0.8438 
+2026-09-05 07:43:37.641273: val auc tensor(0.8828) 
+2026-09-05 07:43:37.641750: Epoch time: 74.35 s 
+2026-09-05 07:43:38.239504:  
+2026-09-05 07:43:38.239631: Epoch 147 
+2026-09-05 07:43:38.239704: Current learning rate: 0.0045 
+2026-09-05 07:44:52.008408: train_loss -0.3914 
+2026-09-05 07:44:52.008593: val_loss -0.3071 
+2026-09-05 07:44:52.008667: Pseudo dice [np.float32(0.9702), np.float32(0.8933), np.float32(0.9422), np.float32(0.8552)] 
+2026-09-05 07:44:52.008733: val classification accuracy 0.75 
+2026-09-05 07:44:52.008877: val auc tensor(0.8672) 
+2026-09-05 07:44:52.009380: Epoch time: 73.77 s 
+2026-09-05 07:44:52.610489:  
+2026-09-05 07:44:52.610607: Epoch 148 
+2026-09-05 07:44:52.610678: Current learning rate: 0.00446 
+2026-09-05 07:46:09.340850: train_loss -0.3943 
+2026-09-05 07:46:09.341043: val_loss -0.2999 
+2026-09-05 07:46:09.341120: Pseudo dice [np.float32(0.9604), np.float32(0.8714), np.float32(0.939), np.float32(0.8796)] 
+2026-09-05 07:46:09.341416: val classification accuracy 0.8438 
+2026-09-05 07:46:09.341598: val auc tensor(0.9297) 
+2026-09-05 07:46:09.342102: Epoch time: 76.73 s 
+2026-09-05 07:46:09.935909:  
+2026-09-05 07:46:09.936037: Epoch 149 
+2026-09-05 07:46:09.936108: Current learning rate: 0.00442 
+2026-09-05 07:47:25.529158: train_loss -0.3903 
+2026-09-05 07:47:25.529358: val_loss -0.3551 
+2026-09-05 07:47:25.529432: Pseudo dice [np.float32(0.9554), np.float32(0.8778), np.float32(0.9364), np.float32(0.8807)] 
+2026-09-05 07:47:25.529495: val classification accuracy 0.8438 
+2026-09-05 07:47:25.529647: val auc tensor(0.9766) 
+2026-09-05 07:47:25.530134: Epoch time: 75.59 s 
+2026-09-05 07:47:25.768987: Yayy! New best evaluation metric: 1.889799952507019 
+2026-09-05 07:47:26.006491: 
+Task weights: 
+2026-09-05 07:47:26.009694:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 07:47:26.609074:  
+2026-09-05 07:47:26.609198: Epoch 150 
+2026-09-05 07:47:26.609274: Current learning rate: 0.00438 
+2026-09-05 07:48:42.731911: train_loss -0.3866 
+2026-09-05 07:48:42.732117: val_loss -0.3103 
+2026-09-05 07:48:42.732194: Pseudo dice [np.float32(0.9652), np.float32(0.8314), np.float32(0.9381), np.float32(0.8828)] 
+2026-09-05 07:48:42.732258: val classification accuracy 0.5938 
+2026-09-05 07:48:42.732409: val auc tensor(0.8945) 
+2026-09-05 07:48:42.732911: Epoch time: 76.12 s 
+2026-09-05 07:48:43.325126:  
+2026-09-05 07:48:43.325254: Epoch 151 
+2026-09-05 07:48:43.325337: Current learning rate: 0.00434 
+2026-09-05 07:49:57.356753: train_loss -0.3898 
+2026-09-05 07:49:57.356932: val_loss -0.3106 
+2026-09-05 07:49:57.357008: Pseudo dice [np.float32(0.9653), np.float32(0.8707), np.float32(0.9329), np.float32(0.8731)] 
+2026-09-05 07:49:57.357082: val classification accuracy 0.7188 
+2026-09-05 07:49:57.357235: val auc tensor(0.9453) 
+2026-09-05 07:49:57.357703: Epoch time: 74.03 s 
+2026-09-05 07:49:57.949697:  
+2026-09-05 07:49:57.949821: Epoch 152 
+2026-09-05 07:49:57.949893: Current learning rate: 0.0043 
+2026-09-05 07:51:13.859570: train_loss -0.394 
+2026-09-05 07:51:13.859766: val_loss -0.333 
+2026-09-05 07:51:13.859840: Pseudo dice [np.float32(0.969), np.float32(0.8825), np.float32(0.944), np.float32(0.8926)] 
+2026-09-05 07:51:13.859904: val classification accuracy 0.7812 
+2026-09-05 07:51:13.860061: val auc tensor(0.8867) 
+2026-09-05 07:51:13.860574: Epoch time: 75.91 s 
+2026-09-05 07:51:14.873917:  
+2026-09-05 07:51:14.874044: Epoch 153 
+2026-09-05 07:51:14.874111: Current learning rate: 0.00427 
+2026-09-05 07:52:30.047125: train_loss -0.3931 
+2026-09-05 07:52:30.047305: val_loss -0.3029 
+2026-09-05 07:52:30.047377: Pseudo dice [np.float32(0.9543), np.float32(0.8643), np.float32(0.9408), np.float32(0.9009)] 
+2026-09-05 07:52:30.047452: val classification accuracy 0.6875 
+2026-09-05 07:52:30.047604: val auc tensor(0.8828) 
+2026-09-05 07:52:30.048082: Epoch time: 75.17 s 
+2026-09-05 07:52:30.653170:  
+2026-09-05 07:52:30.653302: Epoch 154 
+2026-09-05 07:52:30.653380: Current learning rate: 0.00423 
+2026-09-05 07:53:46.930619: train_loss -0.3951 
+2026-09-05 07:53:46.930797: val_loss -0.313 
+2026-09-05 07:53:46.930867: Pseudo dice [np.float32(0.9606), np.float32(0.8863), np.float32(0.9381), np.float32(0.8542)] 
+2026-09-05 07:53:46.930930: val classification accuracy 0.7812 
+2026-09-05 07:53:46.931083: val auc tensor(0.9141) 
+2026-09-05 07:53:46.931556: Epoch time: 76.28 s 
+2026-09-05 07:53:47.542076:  
+2026-09-05 07:53:47.542210: Epoch 155 
+2026-09-05 07:53:47.542289: Current learning rate: 0.00419 
+2026-09-05 07:55:03.947190: train_loss -0.3929 
+2026-09-05 07:55:03.947368: val_loss -0.2987 
+2026-09-05 07:55:03.947443: Pseudo dice [np.float32(0.9581), np.float32(0.8865), np.float32(0.9343), np.float32(0.8839)] 
+2026-09-05 07:55:03.947506: val classification accuracy 0.7188 
+2026-09-05 07:55:03.947652: val auc tensor(0.9062) 
+2026-09-05 07:55:03.948103: Epoch time: 76.41 s 
+2026-09-05 07:55:04.554365:  
+2026-09-05 07:55:04.554484: Epoch 156 
+2026-09-05 07:55:04.554561: Current learning rate: 0.00415 
+2026-09-05 07:56:18.533077: train_loss -0.3917 
+2026-09-05 07:56:18.533275: val_loss -0.2761 
+2026-09-05 07:56:18.533348: Pseudo dice [np.float32(0.9672), np.float32(0.91), np.float32(0.9407), np.float32(0.8985)] 
+2026-09-05 07:56:18.533413: val classification accuracy 0.6562 
+2026-09-05 07:56:18.533563: val auc tensor(0.8945) 
+2026-09-05 07:56:18.534020: Epoch time: 73.98 s 
+2026-09-05 07:56:19.139862:  
+2026-09-05 07:56:19.140017: Epoch 157 
+2026-09-05 07:56:19.140102: Current learning rate: 0.00411 
+2026-09-05 07:57:33.418442: train_loss -0.3977 
+2026-09-05 07:57:33.418614: val_loss -0.3238 
+2026-09-05 07:57:33.418686: Pseudo dice [np.float32(0.971), np.float32(0.8981), np.float32(0.9386), np.float32(0.89)] 
+2026-09-05 07:57:33.418751: val classification accuracy 0.8438 
+2026-09-05 07:57:33.418898: val auc tensor(0.9414) 
+2026-09-05 07:57:33.419381: Epoch time: 74.28 s 
+2026-09-05 07:57:34.023137:  
+2026-09-05 07:57:34.023263: Epoch 158 
+2026-09-05 07:57:34.023338: Current learning rate: 0.00407 
+2026-09-05 07:58:48.262491: train_loss -0.3898 
+2026-09-05 07:58:48.262687: val_loss -0.32 
+2026-09-05 07:58:48.262758: Pseudo dice [np.float32(0.9662), np.float32(0.8964), np.float32(0.9226), np.float32(0.8878)] 
+2026-09-05 07:58:48.262823: val classification accuracy 0.9375 
+2026-09-05 07:58:48.262970: val auc tensor(0.9766) 
+2026-09-05 07:58:48.263449: Epoch time: 74.24 s 
+2026-09-05 07:58:48.263595: Yayy! New best evaluation metric: 1.8926000595092773 
+2026-09-05 07:58:48.503210: 
+Task weights: 
+2026-09-05 07:58:48.508297:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 07:58:49.113095:  
+2026-09-05 07:58:49.113222: Epoch 159 
+2026-09-05 07:58:49.113301: Current learning rate: 0.00403 
+2026-09-05 08:00:04.826602: train_loss -0.3952 
+2026-09-05 08:00:04.826782: val_loss -0.3504 
+2026-09-05 08:00:04.826854: Pseudo dice [np.float32(0.9693), np.float32(0.8866), np.float32(0.925), np.float32(0.8775)] 
+2026-09-05 08:00:04.826917: val classification accuracy 0.875 
+2026-09-05 08:00:04.827085: val auc tensor(0.9883) 
+2026-09-05 08:00:04.827560: Epoch time: 75.71 s 
+2026-09-05 08:00:04.827700: Yayy! New best evaluation metric: 1.9041999578475952 
+2026-09-05 08:00:05.067454: 
+Task weights: 
+2026-09-05 08:00:05.072582:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 08:00:05.678653:  
+2026-09-05 08:00:05.678776: Epoch 160 
+2026-09-05 08:00:05.678848: Current learning rate: 0.00399 
+2026-09-05 08:01:20.320644: train_loss -0.3916 
+2026-09-05 08:01:20.320841: val_loss -0.3333 
+2026-09-05 08:01:20.320913: Pseudo dice [np.float32(0.9718), np.float32(0.8959), np.float32(0.9375), np.float32(0.819)] 
+2026-09-05 08:01:20.320977: val classification accuracy 0.875 
+2026-09-05 08:01:20.321151: val auc tensor(1.) 
+2026-09-05 08:01:20.321660: Epoch time: 74.64 s 
+2026-09-05 08:01:20.321805: Yayy! New best evaluation metric: 1.9148999452590942 
+2026-09-05 08:01:20.560034: 
+Task weights: 
+2026-09-05 08:01:20.562175:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 08:01:21.165437:  
+2026-09-05 08:01:21.165556: Epoch 161 
+2026-09-05 08:01:21.165626: Current learning rate: 0.00395 
+2026-09-05 08:02:36.834467: train_loss -0.3855 
+2026-09-05 08:02:36.834641: val_loss -0.334 
+2026-09-05 08:02:36.834712: Pseudo dice [np.float32(0.9576), np.float32(0.8605), np.float32(0.945), np.float32(0.8852)] 
+2026-09-05 08:02:36.834774: val classification accuracy 0.8125 
+2026-09-05 08:02:36.834923: val auc tensor(0.9492) 
+2026-09-05 08:02:36.835409: Epoch time: 75.67 s 
+2026-09-05 08:02:37.438289:  
+2026-09-05 08:02:37.438418: Epoch 162 
+2026-09-05 08:02:37.438502: Current learning rate: 0.00391 
+2026-09-05 08:03:52.530262: train_loss -0.3919 
+2026-09-05 08:03:52.530458: val_loss -0.3365 
+2026-09-05 08:03:52.530533: Pseudo dice [np.float32(0.965), np.float32(0.8696), np.float32(0.9288), np.float32(0.8755)] 
+2026-09-05 08:03:52.530596: val classification accuracy 0.875 
+2026-09-05 08:03:52.530745: val auc tensor(0.9844) 
+2026-09-05 08:03:52.531259: Epoch time: 75.09 s 
+2026-09-05 08:03:53.134963:  
+2026-09-05 08:03:53.135091: Epoch 163 
+2026-09-05 08:03:53.135173: Current learning rate: 0.00387 
+2026-09-05 08:05:07.512370: train_loss -0.3918 
+2026-09-05 08:05:07.512544: val_loss -0.3392 
+2026-09-05 08:05:07.512617: Pseudo dice [np.float32(0.9597), np.float32(0.8778), np.float32(0.9348), np.float32(0.8869)] 
+2026-09-05 08:05:07.512681: val classification accuracy 0.8438 
+2026-09-05 08:05:07.512830: val auc tensor(0.9883) 
+2026-09-05 08:05:07.513306: Epoch time: 74.38 s 
+2026-09-05 08:05:08.112473:  
+2026-09-05 08:05:08.112597: Epoch 164 
+2026-09-05 08:05:08.112667: Current learning rate: 0.00383 
+2026-09-05 08:06:23.693544: train_loss -0.3912 
+2026-09-05 08:06:23.693741: val_loss -0.3442 
+2026-09-05 08:06:23.693816: Pseudo dice [np.float32(0.9662), np.float32(0.8951), np.float32(0.9393), np.float32(0.8478)] 
+2026-09-05 08:06:23.693882: val classification accuracy 0.875 
+2026-09-05 08:06:23.694040: val auc tensor(0.9844) 
+2026-09-05 08:06:23.694544: Epoch time: 75.58 s 
+2026-09-05 08:06:24.288512:  
+2026-09-05 08:06:24.288639: Epoch 165 
+2026-09-05 08:06:24.288719: Current learning rate: 0.00379 
+2026-09-05 08:07:40.405520: train_loss -0.3951 
+2026-09-05 08:07:40.405704: val_loss -0.3238 
+2026-09-05 08:07:40.405777: Pseudo dice [np.float32(0.967), np.float32(0.8929), np.float32(0.942), np.float32(0.872)] 
+2026-09-05 08:07:40.405838: val classification accuracy 0.8125 
+2026-09-05 08:07:40.405985: val auc tensor(0.9023) 
+2026-09-05 08:07:40.406476: Epoch time: 76.12 s 
+2026-09-05 08:07:40.996736:  
+2026-09-05 08:07:40.996854: Epoch 166 
+2026-09-05 08:07:40.996925: Current learning rate: 0.00375 
+2026-09-05 08:08:55.946042: train_loss -0.3955 
+2026-09-05 08:08:55.946241: val_loss -0.2947 
+2026-09-05 08:08:55.946315: Pseudo dice [np.float32(0.9686), np.float32(0.8553), np.float32(0.927), np.float32(0.8713)] 
+2026-09-05 08:08:55.946378: val classification accuracy 0.7188 
+2026-09-05 08:08:55.946529: val auc tensor(0.9414) 
+2026-09-05 08:08:55.947037: Epoch time: 74.95 s 
+2026-09-05 08:08:56.541073:  
+2026-09-05 08:08:56.541199: Epoch 167 
+2026-09-05 08:08:56.541278: Current learning rate: 0.00371 
+2026-09-05 08:10:11.956190: train_loss -0.3968 
+2026-09-05 08:10:11.956377: val_loss -0.2869 
+2026-09-05 08:10:11.956449: Pseudo dice [np.float32(0.9618), np.float32(0.8921), np.float32(0.9288), np.float32(0.8906)] 
+2026-09-05 08:10:11.956513: val classification accuracy 0.8125 
+2026-09-05 08:10:11.956659: val auc tensor(0.9102) 
+2026-09-05 08:10:11.957141: Epoch time: 75.42 s 
+2026-09-05 08:10:12.557175:  
+2026-09-05 08:10:12.557299: Epoch 168 
+2026-09-05 08:10:12.557375: Current learning rate: 0.00367 
+2026-09-05 08:11:28.792556: train_loss -0.3974 
+2026-09-05 08:11:28.792728: val_loss -0.3022 
+2026-09-05 08:11:28.792797: Pseudo dice [np.float32(0.9665), np.float32(0.8834), np.float32(0.9425), np.float32(0.8731)] 
+2026-09-05 08:11:28.792856: val classification accuracy 0.7812 
+2026-09-05 08:11:28.792995: val auc tensor(0.9023) 
+2026-09-05 08:11:28.793439: Epoch time: 76.24 s 
+2026-09-05 08:11:29.392250:  
+2026-09-05 08:11:29.392385: Epoch 169 
+2026-09-05 08:11:29.392475: Current learning rate: 0.00363 
+2026-09-05 08:12:45.170112: train_loss -0.4017 
+2026-09-05 08:12:45.170311: val_loss -0.3138 
+2026-09-05 08:12:45.170382: Pseudo dice [np.float32(0.96), np.float32(0.8783), np.float32(0.9456), np.float32(0.8615)] 
+2026-09-05 08:12:45.170445: val classification accuracy 0.8438 
+2026-09-05 08:12:45.170598: val auc tensor(0.9258) 
+2026-09-05 08:12:45.171100: Epoch time: 75.78 s 
+2026-09-05 08:12:45.785981:  
+2026-09-05 08:12:45.786149: Epoch 170 
+2026-09-05 08:12:45.786243: Current learning rate: 0.00359 
+2026-09-05 08:14:01.663047: train_loss -0.3955 
+2026-09-05 08:14:01.663223: val_loss -0.3345 
+2026-09-05 08:14:01.663296: Pseudo dice [np.float32(0.9672), np.float32(0.8733), np.float32(0.943), np.float32(0.897)] 
+2026-09-05 08:14:01.663363: val classification accuracy 0.75 
+2026-09-05 08:14:01.663522: val auc tensor(0.9062) 
+2026-09-05 08:14:01.664041: Epoch time: 75.88 s 
+2026-09-05 08:14:02.263268:  
+2026-09-05 08:14:02.263401: Epoch 171 
+2026-09-05 08:14:02.263481: Current learning rate: 0.00355 
+2026-09-05 08:15:18.196702: train_loss -0.3927 
+2026-09-05 08:15:18.196908: val_loss -0.3388 
+2026-09-05 08:15:18.196980: Pseudo dice [np.float32(0.9598), np.float32(0.8743), np.float32(0.9457), np.float32(0.891)] 
+2026-09-05 08:15:18.197053: val classification accuracy 0.7812 
+2026-09-05 08:15:18.197214: val auc tensor(0.8906) 
+2026-09-05 08:15:18.197719: Epoch time: 75.93 s 
+2026-09-05 08:15:18.806972:  
+2026-09-05 08:15:18.807096: Epoch 172 
+2026-09-05 08:15:18.807170: Current learning rate: 0.00351 
+2026-09-05 08:16:33.350539: train_loss -0.3913 
+2026-09-05 08:16:33.350715: val_loss -0.3459 
+2026-09-05 08:16:33.350785: Pseudo dice [np.float32(0.962), np.float32(0.8974), np.float32(0.9359), np.float32(0.906)] 
+2026-09-05 08:16:33.350847: val classification accuracy 0.8125 
+2026-09-05 08:16:33.350994: val auc tensor(0.8828) 
+2026-09-05 08:16:33.351470: Epoch time: 74.54 s 
+2026-09-05 08:16:33.949218:  
+2026-09-05 08:16:33.949339: Epoch 173 
+2026-09-05 08:16:33.949409: Current learning rate: 0.00346 
+2026-09-05 08:17:51.118881: train_loss -0.39 
+2026-09-05 08:17:51.119046: val_loss -0.3698 
+2026-09-05 08:17:51.119120: Pseudo dice [np.float32(0.9704), np.float32(0.8819), np.float32(0.9449), np.float32(0.8917)] 
+2026-09-05 08:17:51.119184: val classification accuracy 0.875 
+2026-09-05 08:17:51.119328: val auc tensor(0.9844) 
+2026-09-05 08:17:51.119761: Epoch time: 77.17 s 
+2026-09-05 08:17:51.715772:  
+2026-09-05 08:17:51.715890: Epoch 174 
+2026-09-05 08:17:51.715961: Current learning rate: 0.00342 
+2026-09-05 08:19:03.539451: train_loss -0.3944 
+2026-09-05 08:19:03.539611: val_loss -0.3314 
+2026-09-05 08:19:03.539681: Pseudo dice [np.float32(0.9633), np.float32(0.8892), np.float32(0.9347), np.float32(0.8729)] 
+2026-09-05 08:19:03.539746: val classification accuracy 0.875 
+2026-09-05 08:19:03.539889: val auc tensor(0.9609) 
+2026-09-05 08:19:03.540335: Epoch time: 71.82 s 
+2026-09-05 08:19:04.142309:  
+2026-09-05 08:19:04.142446: Epoch 175 
+2026-09-05 08:19:04.142535: Current learning rate: 0.00338 
+2026-09-05 08:20:19.023479: train_loss -0.3951 
+2026-09-05 08:20:19.023640: val_loss -0.3438 
+2026-09-05 08:20:19.023714: Pseudo dice [np.float32(0.9579), np.float32(0.8082), np.float32(0.9366), np.float32(0.8961)] 
+2026-09-05 08:20:19.023777: val classification accuracy 0.875 
+2026-09-05 08:20:19.023925: val auc tensor(0.9688) 
+2026-09-05 08:20:19.024383: Epoch time: 74.88 s 
+2026-09-05 08:20:19.621451:  
+2026-09-05 08:20:19.621572: Epoch 176 
+2026-09-05 08:20:19.621650: Current learning rate: 0.00334 
+2026-09-05 08:21:35.017251: train_loss -0.3962 
+2026-09-05 08:21:35.017415: val_loss -0.3579 
+2026-09-05 08:21:35.017487: Pseudo dice [np.float32(0.9688), np.float32(0.8887), np.float32(0.9406), np.float32(0.8971)] 
+2026-09-05 08:21:35.017549: val classification accuracy 0.9062 
+2026-09-05 08:21:35.017694: val auc tensor(0.9570) 
+2026-09-05 08:21:35.018132: Epoch time: 75.4 s 
+2026-09-05 08:21:35.616494:  
+2026-09-05 08:21:35.616626: Epoch 177 
+2026-09-05 08:21:35.616705: Current learning rate: 0.0033 
+2026-09-05 08:22:50.079863: train_loss -0.398 
+2026-09-05 08:22:50.080031: val_loss -0.3377 
+2026-09-05 08:22:50.080108: Pseudo dice [np.float32(0.9708), np.float32(0.8147), np.float32(0.9421), np.float32(0.8986)] 
+2026-09-05 08:22:50.080173: val classification accuracy 0.875 
+2026-09-05 08:22:50.080322: val auc tensor(0.9570) 
+2026-09-05 08:22:50.080756: Epoch time: 74.46 s 
+2026-09-05 08:22:50.678777:  
+2026-09-05 08:22:50.678901: Epoch 178 
+2026-09-05 08:22:50.678973: Current learning rate: 0.00326 
+2026-09-05 08:24:06.275694: train_loss -0.3953 
+2026-09-05 08:24:06.275858: val_loss -0.3313 
+2026-09-05 08:24:06.275932: Pseudo dice [np.float32(0.9498), np.float32(0.8929), np.float32(0.9365), np.float32(0.8916)] 
+2026-09-05 08:24:06.275996: val classification accuracy 0.7812 
+2026-09-05 08:24:06.276144: val auc tensor(0.8867) 
+2026-09-05 08:24:06.276585: Epoch time: 75.6 s 
+2026-09-05 08:24:06.873753:  
+2026-09-05 08:24:06.873864: Epoch 179 
+2026-09-05 08:24:06.873936: Current learning rate: 0.00322 
+2026-09-05 08:25:21.941579: train_loss -0.3956 
+2026-09-05 08:25:21.941740: val_loss -0.3295 
+2026-09-05 08:25:21.941883: Pseudo dice [np.float32(0.9639), np.float32(0.8858), np.float32(0.9344), np.float32(0.8662)] 
+2026-09-05 08:25:21.941949: val classification accuracy 0.8438 
+2026-09-05 08:25:21.942098: val auc tensor(0.9375) 
+2026-09-05 08:25:21.942544: Epoch time: 75.07 s 
+2026-09-05 08:25:22.548732:  
+2026-09-05 08:25:22.548874: Epoch 180 
+2026-09-05 08:25:22.548954: Current learning rate: 0.00318 
+2026-09-05 08:26:37.226993: train_loss -0.3956 
+2026-09-05 08:26:37.227156: val_loss -0.3296 
+2026-09-05 08:26:37.227227: Pseudo dice [np.float32(0.9554), np.float32(0.8698), np.float32(0.9266), np.float32(0.8981)] 
+2026-09-05 08:26:37.227287: val classification accuracy 0.7812 
+2026-09-05 08:26:37.227430: val auc tensor(0.9258) 
+2026-09-05 08:26:37.227856: Epoch time: 74.68 s 
+2026-09-05 08:26:37.826791:  
+2026-09-05 08:26:37.826915: Epoch 181 
+2026-09-05 08:26:37.826983: Current learning rate: 0.00314 
+2026-09-05 08:27:51.250669: train_loss -0.3997 
+2026-09-05 08:27:51.250867: val_loss -0.3588 
+2026-09-05 08:27:51.250938: Pseudo dice [np.float32(0.9623), np.float32(0.878), np.float32(0.9415), np.float32(0.8815)] 
+2026-09-05 08:27:51.251002: val classification accuracy 0.9688 
+2026-09-05 08:27:51.251167: val auc tensor(0.9883) 
+2026-09-05 08:27:51.251658: Epoch time: 73.43 s 
+2026-09-05 08:27:51.850241:  
+2026-09-05 08:27:51.850363: Epoch 182 
+2026-09-05 08:27:51.850439: Current learning rate: 0.0031 
+2026-09-05 08:29:06.386560: train_loss -0.3958 
+2026-09-05 08:29:06.386736: val_loss -0.3485 
+2026-09-05 08:29:06.386806: Pseudo dice [np.float32(0.9683), np.float32(0.8794), np.float32(0.9492), np.float32(0.8863)] 
+2026-09-05 08:29:06.386872: val classification accuracy 0.8438 
+2026-09-05 08:29:06.387032: val auc tensor(0.9805) 
+2026-09-05 08:29:06.387483: Epoch time: 74.54 s 
+2026-09-05 08:29:06.984813:  
+2026-09-05 08:29:06.984933: Epoch 183 
+2026-09-05 08:29:06.985004: Current learning rate: 0.00306 
+2026-09-05 08:30:22.036410: train_loss -0.3939 
+2026-09-05 08:30:22.036606: val_loss -0.3012 
+2026-09-05 08:30:22.036679: Pseudo dice [np.float32(0.9658), np.float32(0.845), np.float32(0.9413), np.float32(0.8942)] 
+2026-09-05 08:30:22.036741: val classification accuracy 0.7812 
+2026-09-05 08:30:22.036895: val auc tensor(0.8633) 
+2026-09-05 08:30:22.037380: Epoch time: 75.05 s 
+2026-09-05 08:30:22.635269:  
+2026-09-05 08:30:22.635379: Epoch 184 
+2026-09-05 08:30:22.635450: Current learning rate: 0.00302 
+2026-09-05 08:31:34.473392: train_loss -0.3923 
+2026-09-05 08:31:34.473568: val_loss -0.3595 
+2026-09-05 08:31:34.473648: Pseudo dice [np.float32(0.9654), np.float32(0.8986), np.float32(0.9385), np.float32(0.8948)] 
+2026-09-05 08:31:34.473711: val classification accuracy 0.8438 
+2026-09-05 08:31:34.473854: val auc tensor(0.9805) 
+2026-09-05 08:31:34.474332: Epoch time: 71.84 s 
+2026-09-05 08:31:35.087201:  
+2026-09-05 08:31:35.087339: Epoch 185 
+2026-09-05 08:31:35.087424: Current learning rate: 0.00297 
+2026-09-05 08:32:51.470540: train_loss -0.3958 
+2026-09-05 08:32:51.470736: val_loss -0.3399 
+2026-09-05 08:32:51.470812: Pseudo dice [np.float32(0.958), np.float32(0.9181), np.float32(0.936), np.float32(0.8851)] 
+2026-09-05 08:32:51.470878: val classification accuracy 0.75 
+2026-09-05 08:32:51.471042: val auc tensor(0.9922) 
+2026-09-05 08:32:51.471545: Epoch time: 76.38 s 
+2026-09-05 08:32:52.077560:  
+2026-09-05 08:32:52.077697: Epoch 186 
+2026-09-05 08:32:52.077783: Current learning rate: 0.00293 
+2026-09-05 08:34:09.693352: train_loss -0.3979 
+2026-09-05 08:34:09.693509: val_loss -0.351 
+2026-09-05 08:34:09.693582: Pseudo dice [np.float32(0.9663), np.float32(0.8784), np.float32(0.9328), np.float32(0.882)] 
+2026-09-05 08:34:09.693647: val classification accuracy 0.875 
+2026-09-05 08:34:09.693793: val auc tensor(0.9453) 
+2026-09-05 08:34:09.694246: Epoch time: 77.62 s 
+2026-09-05 08:34:10.297659:  
+2026-09-05 08:34:10.297793: Epoch 187 
+2026-09-05 08:34:10.297877: Current learning rate: 0.00289 
+2026-09-05 08:35:25.830738: train_loss -0.39 
+2026-09-05 08:35:25.830948: val_loss -0.3353 
+2026-09-05 08:35:25.831032: Pseudo dice [np.float32(0.9636), np.float32(0.8885), np.float32(0.9299), np.float32(0.8836)] 
+2026-09-05 08:35:25.831101: val classification accuracy 0.7812 
+2026-09-05 08:35:25.831265: val auc tensor(0.9414) 
+2026-09-05 08:35:25.831784: Epoch time: 75.53 s 
+2026-09-05 08:35:26.433941:  
+2026-09-05 08:35:26.434080: Epoch 188 
+2026-09-05 08:35:26.434163: Current learning rate: 0.00285 
+2026-09-05 08:36:41.924612: train_loss -0.3952 
+2026-09-05 08:36:41.924778: val_loss -0.3177 
+2026-09-05 08:36:41.924855: Pseudo dice [np.float32(0.9639), np.float32(0.8908), np.float32(0.9405), np.float32(0.8724)] 
+2026-09-05 08:36:41.924923: val classification accuracy 0.75 
+2026-09-05 08:36:41.925078: val auc tensor(0.9453) 
+2026-09-05 08:36:41.925529: Epoch time: 75.49 s 
+2026-09-05 08:36:42.530262:  
+2026-09-05 08:36:42.530387: Epoch 189 
+2026-09-05 08:36:42.530467: Current learning rate: 0.00281 
+2026-09-05 08:37:59.389747: train_loss -0.3936 
+2026-09-05 08:37:59.389945: val_loss -0.332 
+2026-09-05 08:37:59.390017: Pseudo dice [np.float32(0.9662), np.float32(0.8791), np.float32(0.9198), np.float32(0.8982)] 
+2026-09-05 08:37:59.390091: val classification accuracy 0.7188 
+2026-09-05 08:37:59.390249: val auc tensor(0.9727) 
+2026-09-05 08:37:59.390731: Epoch time: 76.86 s 
+2026-09-05 08:37:59.989653:  
+2026-09-05 08:37:59.989775: Epoch 190 
+2026-09-05 08:37:59.989847: Current learning rate: 0.00277 
+2026-09-05 08:39:15.515434: train_loss -0.393 
+2026-09-05 08:39:15.515611: val_loss -0.3536 
+2026-09-05 08:39:15.515686: Pseudo dice [np.float32(0.9589), np.float32(0.9108), np.float32(0.925), np.float32(0.8803)] 
+2026-09-05 08:39:15.515750: val classification accuracy 0.9375 
+2026-09-05 08:39:15.515904: val auc tensor(0.9922) 
+2026-09-05 08:39:15.516367: Epoch time: 75.53 s 
+2026-09-05 08:39:16.116185:  
+2026-09-05 08:39:16.116311: Epoch 191 
+2026-09-05 08:39:16.116386: Current learning rate: 0.00273 
+2026-09-05 08:40:31.798650: train_loss -0.3952 
+2026-09-05 08:40:31.798847: val_loss -0.3364 
+2026-09-05 08:40:31.798923: Pseudo dice [np.float32(0.9604), np.float32(0.9025), np.float32(0.9268), np.float32(0.9019)] 
+2026-09-05 08:40:31.798990: val classification accuracy 0.8125 
+2026-09-05 08:40:31.799155: val auc tensor(0.9570) 
+2026-09-05 08:40:31.799690: Epoch time: 75.68 s 
+2026-09-05 08:40:32.405537:  
+2026-09-05 08:40:32.405670: Epoch 192 
+2026-09-05 08:40:32.405758: Current learning rate: 0.00268 
+2026-09-05 08:41:46.900742: train_loss -0.3987 
+2026-09-05 08:41:46.900917: val_loss -0.2865 
+2026-09-05 08:41:46.901000: Pseudo dice [np.float32(0.9707), np.float32(0.8878), np.float32(0.9141), np.float32(0.8953)] 
+2026-09-05 08:41:46.901074: val classification accuracy 0.7188 
+2026-09-05 08:41:46.901226: val auc tensor(0.8477) 
+2026-09-05 08:41:46.901675: Epoch time: 74.5 s 
+2026-09-05 08:41:47.510839:  
+2026-09-05 08:41:47.510978: Epoch 193 
+2026-09-05 08:41:47.511081: Current learning rate: 0.00264 
+2026-09-05 08:43:03.414381: train_loss -0.4004 
+2026-09-05 08:43:03.414576: val_loss -0.3259 
+2026-09-05 08:43:03.414650: Pseudo dice [np.float32(0.9535), np.float32(0.8578), np.float32(0.9478), np.float32(0.8698)] 
+2026-09-05 08:43:03.414714: val classification accuracy 0.7188 
+2026-09-05 08:43:03.414870: val auc tensor(0.8516) 
+2026-09-05 08:43:03.415364: Epoch time: 75.9 s 
+2026-09-05 08:43:04.023270:  
+2026-09-05 08:43:04.023432: Epoch 194 
+2026-09-05 08:43:04.023523: Current learning rate: 0.0026 
+2026-09-05 08:44:18.531445: train_loss -0.3934 
+2026-09-05 08:44:18.531630: val_loss -0.2992 
+2026-09-05 08:44:18.531701: Pseudo dice [np.float32(0.963), np.float32(0.9051), np.float32(0.9421), np.float32(0.8876)] 
+2026-09-05 08:44:18.531766: val classification accuracy 0.625 
+2026-09-05 08:44:18.531921: val auc tensor(0.8945) 
+2026-09-05 08:44:18.532418: Epoch time: 74.51 s 
+2026-09-05 08:44:19.139774:  
+2026-09-05 08:44:19.139902: Epoch 195 
+2026-09-05 08:44:19.139978: Current learning rate: 0.00256 
+2026-09-05 08:45:34.808073: train_loss -0.3972 
+2026-09-05 08:45:34.808279: val_loss -0.3084 
+2026-09-05 08:45:34.808353: Pseudo dice [np.float32(0.963), np.float32(0.8878), np.float32(0.9415), np.float32(0.8776)] 
+2026-09-05 08:45:34.808418: val classification accuracy 0.5938 
+2026-09-05 08:45:34.808785: val auc tensor(0.9805) 
+2026-09-05 08:45:34.809290: Epoch time: 75.67 s 
+2026-09-05 08:45:35.421473:  
+2026-09-05 08:45:35.421590: Epoch 196 
+2026-09-05 08:45:35.421677: Current learning rate: 0.00252 
+2026-09-05 08:46:49.353501: train_loss -0.3929 
+2026-09-05 08:46:49.353707: val_loss -0.341 
+2026-09-05 08:46:49.353784: Pseudo dice [np.float32(0.968), np.float32(0.9008), np.float32(0.9317), np.float32(0.8975)] 
+2026-09-05 08:46:49.353852: val classification accuracy 0.75 
+2026-09-05 08:46:49.354009: val auc tensor(0.9531) 
+2026-09-05 08:46:49.354501: Epoch time: 73.93 s 
+2026-09-05 08:46:50.039268:  
+2026-09-05 08:46:50.039404: Epoch 197 
+2026-09-05 08:46:50.039497: Current learning rate: 0.00248 
+2026-09-05 08:48:08.029793: train_loss -0.3949 
+2026-09-05 08:48:08.029990: val_loss -0.3475 
+2026-09-05 08:48:08.030070: Pseudo dice [np.float32(0.9591), np.float32(0.8436), np.float32(0.9305), np.float32(0.9004)] 
+2026-09-05 08:48:08.030136: val classification accuracy 0.875 
+2026-09-05 08:48:08.030293: val auc tensor(1.) 
+2026-09-05 08:48:08.030764: Epoch time: 77.99 s 
+2026-09-05 08:48:08.030902: Yayy! New best evaluation metric: 1.9169000387191772 
+2026-09-05 08:48:08.273458: 
+Task weights: 
+2026-09-05 08:48:08.275774:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 08:48:08.881248:  
+2026-09-05 08:48:08.881363: Epoch 198 
+2026-09-05 08:48:08.881434: Current learning rate: 0.00243 
+2026-09-05 08:49:24.708600: train_loss -0.3923 
+2026-09-05 08:49:24.708776: val_loss -0.2986 
+2026-09-05 08:49:24.708850: Pseudo dice [np.float32(0.9645), np.float32(0.8267), np.float32(0.9443), np.float32(0.8934)] 
+2026-09-05 08:49:24.708916: val classification accuracy 0.75 
+2026-09-05 08:49:24.709075: val auc tensor(0.9062) 
+2026-09-05 08:49:24.709556: Epoch time: 75.83 s 
+2026-09-05 08:49:25.314418:  
+2026-09-05 08:49:25.314544: Epoch 199 
+2026-09-05 08:49:25.314624: Current learning rate: 0.00239 
+2026-09-05 08:50:42.078992: train_loss -0.3977 
+2026-09-05 08:50:42.079213: val_loss -0.3544 
+2026-09-05 08:50:42.079288: Pseudo dice [np.float32(0.9671), np.float32(0.8556), np.float32(0.929), np.float32(0.8946)] 
+2026-09-05 08:50:42.079355: val classification accuracy 0.9062 
+2026-09-05 08:50:42.079512: val auc tensor(0.9609) 
+2026-09-05 08:50:42.080023: Epoch time: 76.77 s 
+2026-09-05 08:50:43.380556:  
+2026-09-05 08:50:43.380690: Epoch 200 
+2026-09-05 08:50:43.380779: Current learning rate: 0.00235 
+2026-09-05 08:52:00.120137: train_loss -0.3988 
+2026-09-05 08:52:00.120315: val_loss -0.3163 
+2026-09-05 08:52:00.120388: Pseudo dice [np.float32(0.9578), np.float32(0.9007), np.float32(0.9408), np.float32(0.8743)] 
+2026-09-05 08:52:00.120454: val classification accuracy 0.7188 
+2026-09-05 08:52:00.120610: val auc tensor(0.9180) 
+2026-09-05 08:52:00.121097: Epoch time: 76.74 s 
+2026-09-05 08:52:00.736987:  
+2026-09-05 08:52:00.737128: Epoch 201 
+2026-09-05 08:52:00.737214: Current learning rate: 0.00231 
+2026-09-05 08:53:15.771672: train_loss -0.394 
+2026-09-05 08:53:15.771884: val_loss -0.3652 
+2026-09-05 08:53:15.771957: Pseudo dice [np.float32(0.9655), np.float32(0.8791), np.float32(0.9454), np.float32(0.8922)] 
+2026-09-05 08:53:15.772022: val classification accuracy 0.875 
+2026-09-05 08:53:15.772190: val auc tensor(0.9648) 
+2026-09-05 08:53:15.772700: Epoch time: 75.04 s 
+2026-09-05 08:53:16.385278:  
+2026-09-05 08:53:16.385408: Epoch 202 
+2026-09-05 08:53:16.385504: Current learning rate: 0.00226 
+2026-09-05 08:54:29.411983: train_loss -0.3953 
+2026-09-05 08:54:29.412179: val_loss -0.352 
+2026-09-05 08:54:29.412255: Pseudo dice [np.float32(0.9613), np.float32(0.8776), np.float32(0.9344), np.float32(0.8933)] 
+2026-09-05 08:54:29.412317: val classification accuracy 0.75 
+2026-09-05 08:54:29.412470: val auc tensor(0.9844) 
+2026-09-05 08:54:29.412947: Epoch time: 73.03 s 
+2026-09-05 08:54:30.021937:  
+2026-09-05 08:54:30.022064: Epoch 203 
+2026-09-05 08:54:30.022141: Current learning rate: 0.00222 
+2026-09-05 08:55:44.575789: train_loss -0.3957 
+2026-09-05 08:55:44.576004: val_loss -0.3664 
+2026-09-05 08:55:44.576086: Pseudo dice [np.float32(0.9696), np.float32(0.8881), np.float32(0.9364), np.float32(0.8651)] 
+2026-09-05 08:55:44.576152: val classification accuracy 0.9062 
+2026-09-05 08:55:44.576312: val auc tensor(0.9766) 
+2026-09-05 08:55:44.576815: Epoch time: 74.56 s 
+2026-09-05 08:55:45.191900:  
+2026-09-05 08:55:45.192036: Epoch 204 
+2026-09-05 08:55:45.192117: Current learning rate: 0.00218 
+2026-09-05 08:56:58.793476: train_loss -0.4021 
+2026-09-05 08:56:58.793670: val_loss -0.3388 
+2026-09-05 08:56:58.793741: Pseudo dice [np.float32(0.9632), np.float32(0.872), np.float32(0.9355), np.float32(0.8779)] 
+2026-09-05 08:56:58.793803: val classification accuracy 0.8125 
+2026-09-05 08:56:58.793952: val auc tensor(0.9180) 
+2026-09-05 08:56:58.794442: Epoch time: 73.6 s 
+2026-09-05 08:56:59.403182:  
+2026-09-05 08:56:59.403319: Epoch 205 
+2026-09-05 08:56:59.403410: Current learning rate: 0.00214 
+2026-09-05 08:58:15.078344: train_loss -0.4019 
+2026-09-05 08:58:15.078504: val_loss -0.3261 
+2026-09-05 08:58:15.078580: Pseudo dice [np.float32(0.9687), np.float32(0.8756), np.float32(0.9378), np.float32(0.892)] 
+2026-09-05 08:58:15.078645: val classification accuracy 0.875 
+2026-09-05 08:58:15.078789: val auc tensor(0.8984) 
+2026-09-05 08:58:15.079240: Epoch time: 75.68 s 
+2026-09-05 08:58:15.669879:  
+2026-09-05 08:58:15.670010: Epoch 206 
+2026-09-05 08:58:15.670091: Current learning rate: 0.00209 
+2026-09-05 08:59:30.631078: train_loss -0.396 
+2026-09-05 08:59:30.631232: val_loss -0.3367 
+2026-09-05 08:59:30.631303: Pseudo dice [np.float32(0.962), np.float32(0.9109), np.float32(0.9335), np.float32(0.8644)] 
+2026-09-05 08:59:30.631368: val classification accuracy 0.7812 
+2026-09-05 08:59:30.631514: val auc tensor(0.9531) 
+2026-09-05 08:59:30.631947: Epoch time: 74.96 s 
+2026-09-05 08:59:31.219947:  
+2026-09-05 08:59:31.220088: Epoch 207 
+2026-09-05 08:59:31.220172: Current learning rate: 0.00205 
+2026-09-05 09:00:46.561224: train_loss -0.4055 
+2026-09-05 09:00:46.561388: val_loss -0.3298 
+2026-09-05 09:00:46.561461: Pseudo dice [np.float32(0.9547), np.float32(0.88), np.float32(0.9382), np.float32(0.8852)] 
+2026-09-05 09:00:46.561525: val classification accuracy 0.875 
+2026-09-05 09:00:46.561667: val auc tensor(0.9023) 
+2026-09-05 09:00:46.562104: Epoch time: 75.34 s 
+2026-09-05 09:00:47.147725:  
+2026-09-05 09:00:47.147836: Epoch 208 
+2026-09-05 09:00:47.147916: Current learning rate: 0.00201 
+2026-09-05 09:02:02.182574: train_loss -0.4013 
+2026-09-05 09:02:02.182739: val_loss -0.3385 
+2026-09-05 09:02:02.182810: Pseudo dice [np.float32(0.9676), np.float32(0.8665), np.float32(0.9393), np.float32(0.8729)] 
+2026-09-05 09:02:02.182876: val classification accuracy 0.875 
+2026-09-05 09:02:02.183017: val auc tensor(0.9531) 
+2026-09-05 09:02:02.183464: Epoch time: 75.04 s 
+2026-09-05 09:02:02.768131:  
+2026-09-05 09:02:02.768261: Epoch 209 
+2026-09-05 09:02:02.768335: Current learning rate: 0.00196 
+2026-09-05 09:03:17.055188: train_loss -0.3995 
+2026-09-05 09:03:17.055355: val_loss -0.3325 
+2026-09-05 09:03:17.055426: Pseudo dice [np.float32(0.9703), np.float32(0.8783), np.float32(0.9349), np.float32(0.8991)] 
+2026-09-05 09:03:17.055489: val classification accuracy 0.75 
+2026-09-05 09:03:17.055632: val auc tensor(0.8867) 
+2026-09-05 09:03:17.056074: Epoch time: 74.29 s 
+2026-09-05 09:03:17.643635:  
+2026-09-05 09:03:17.643765: Epoch 210 
+2026-09-05 09:03:17.643847: Current learning rate: 0.00192 
+2026-09-05 09:04:31.443598: train_loss -0.4008 
+2026-09-05 09:04:31.443758: val_loss -0.3539 
+2026-09-05 09:04:31.443833: Pseudo dice [np.float32(0.9618), np.float32(0.8821), np.float32(0.9421), np.float32(0.8953)] 
+2026-09-05 09:04:31.443898: val classification accuracy 0.875 
+2026-09-05 09:04:31.444048: val auc tensor(0.9805) 
+2026-09-05 09:04:31.444484: Epoch time: 73.8 s 
+2026-09-05 09:04:32.029971:  
+2026-09-05 09:04:32.030101: Epoch 211 
+2026-09-05 09:04:32.030175: Current learning rate: 0.00188 
+2026-09-05 09:05:45.131566: train_loss -0.3984 
+2026-09-05 09:05:45.131780: val_loss -0.3361 
+2026-09-05 09:05:45.131853: Pseudo dice [np.float32(0.9652), np.float32(0.8763), np.float32(0.9442), np.float32(0.8875)] 
+2026-09-05 09:05:45.131919: val classification accuracy 0.7812 
+2026-09-05 09:05:45.132289: val auc tensor(0.9141) 
+2026-09-05 09:05:45.132795: Epoch time: 73.1 s 
+2026-09-05 09:05:45.718624:  
+2026-09-05 09:05:45.718748: Epoch 212 
+2026-09-05 09:05:45.718822: Current learning rate: 0.00184 
+2026-09-05 09:07:01.209657: train_loss -0.3952 
+2026-09-05 09:07:01.209871: val_loss -0.3525 
+2026-09-05 09:07:01.209944: Pseudo dice [np.float32(0.9635), np.float32(0.8767), np.float32(0.926), np.float32(0.8757)] 
+2026-09-05 09:07:01.210008: val classification accuracy 0.9062 
+2026-09-05 09:07:01.210167: val auc tensor(0.9805) 
+2026-09-05 09:07:01.210649: Epoch time: 75.49 s 
+2026-09-05 09:07:01.799784:  
+2026-09-05 09:07:01.799909: Epoch 213 
+2026-09-05 09:07:01.799985: Current learning rate: 0.00179 
+2026-09-05 09:08:17.189085: train_loss -0.3987 
+2026-09-05 09:08:17.189297: val_loss -0.3259 
+2026-09-05 09:08:17.189371: Pseudo dice [np.float32(0.9583), np.float32(0.8887), np.float32(0.9441), np.float32(0.8781)] 
+2026-09-05 09:08:17.189434: val classification accuracy 0.7812 
+2026-09-05 09:08:17.189586: val auc tensor(0.8867) 
+2026-09-05 09:08:17.190065: Epoch time: 75.39 s 
+2026-09-05 09:08:17.772339:  
+2026-09-05 09:08:17.772469: Epoch 214 
+2026-09-05 09:08:17.772547: Current learning rate: 0.00175 
+2026-09-05 09:09:33.363832: train_loss -0.4009 
+2026-09-05 09:09:33.364047: val_loss -0.3218 
+2026-09-05 09:09:33.364120: Pseudo dice [np.float32(0.9578), np.float32(0.882), np.float32(0.9429), np.float32(0.8786)] 
+2026-09-05 09:09:33.364184: val classification accuracy 0.8125 
+2026-09-05 09:09:33.364336: val auc tensor(0.9180) 
+2026-09-05 09:09:33.364803: Epoch time: 75.59 s 
+2026-09-05 09:09:34.373154:  
+2026-09-05 09:09:34.373280: Epoch 215 
+2026-09-05 09:09:34.373364: Current learning rate: 0.0017 
+2026-09-05 09:10:50.481888: train_loss -0.3981 
+2026-09-05 09:10:50.482107: val_loss -0.3461 
+2026-09-05 09:10:50.482187: Pseudo dice [np.float32(0.9595), np.float32(0.8572), np.float32(0.9395), np.float32(0.9111)] 
+2026-09-05 09:10:50.482256: val classification accuracy 0.8438 
+2026-09-05 09:10:50.482414: val auc tensor(0.9180) 
+2026-09-05 09:10:50.482917: Epoch time: 76.11 s 
+2026-09-05 09:10:51.066624:  
+2026-09-05 09:10:51.066736: Epoch 216 
+2026-09-05 09:10:51.066818: Current learning rate: 0.00166 
+2026-09-05 09:12:07.252626: train_loss -0.3974 
+2026-09-05 09:12:07.252813: val_loss -0.3337 
+2026-09-05 09:12:07.252887: Pseudo dice [np.float32(0.9697), np.float32(0.8863), np.float32(0.9464), np.float32(0.9006)] 
+2026-09-05 09:12:07.252954: val classification accuracy 0.7812 
+2026-09-05 09:12:07.253119: val auc tensor(0.9414) 
+2026-09-05 09:12:07.253609: Epoch time: 76.19 s 
+2026-09-05 09:12:07.838975:  
+2026-09-05 09:12:07.839096: Epoch 217 
+2026-09-05 09:12:07.839167: Current learning rate: 0.00162 
+2026-09-05 09:13:24.361535: train_loss -0.3961 
+2026-09-05 09:13:24.361720: val_loss -0.3071 
+2026-09-05 09:13:24.361794: Pseudo dice [np.float32(0.9695), np.float32(0.8694), np.float32(0.935), np.float32(0.9032)] 
+2026-09-05 09:13:24.361861: val classification accuracy 0.875 
+2026-09-05 09:13:24.362009: val auc tensor(0.9102) 
+2026-09-05 09:13:24.362488: Epoch time: 76.52 s 
+2026-09-05 09:13:24.945914:  
+2026-09-05 09:13:24.946032: Epoch 218 
+2026-09-05 09:13:24.946103: Current learning rate: 0.00157 
+2026-09-05 09:14:40.974142: train_loss -0.3984 
+2026-09-05 09:14:40.974354: val_loss -0.3038 
+2026-09-05 09:14:40.974431: Pseudo dice [np.float32(0.9679), np.float32(0.834), np.float32(0.9461), np.float32(0.8874)] 
+2026-09-05 09:14:40.974498: val classification accuracy 0.75 
+2026-09-05 09:14:40.974653: val auc tensor(0.8711) 
+2026-09-05 09:14:40.975163: Epoch time: 76.03 s 
+2026-09-05 09:14:41.570282:  
+2026-09-05 09:14:41.570400: Epoch 219 
+2026-09-05 09:14:41.570472: Current learning rate: 0.00153 
+2026-09-05 09:15:56.568699: train_loss -0.4063 
+2026-09-05 09:15:56.568887: val_loss -0.3306 
+2026-09-05 09:15:56.568964: Pseudo dice [np.float32(0.9716), np.float32(0.8378), np.float32(0.9269), np.float32(0.8721)] 
+2026-09-05 09:15:56.569034: val classification accuracy 0.8125 
+2026-09-05 09:15:56.569183: val auc tensor(0.9453) 
+2026-09-05 09:15:56.569646: Epoch time: 75.0 s 
+2026-09-05 09:15:57.151361:  
+2026-09-05 09:15:57.151490: Epoch 220 
+2026-09-05 09:15:57.151565: Current learning rate: 0.00148 
+2026-09-05 09:17:13.180355: train_loss -0.3991 
+2026-09-05 09:17:13.180569: val_loss -0.2999 
+2026-09-05 09:17:13.180646: Pseudo dice [np.float32(0.9631), np.float32(0.8864), np.float32(0.9364), np.float32(0.8763)] 
+2026-09-05 09:17:13.180712: val classification accuracy 0.7812 
+2026-09-05 09:17:13.180871: val auc tensor(0.8984) 
+2026-09-05 09:17:13.181388: Epoch time: 76.03 s 
+2026-09-05 09:17:13.763004:  
+2026-09-05 09:17:13.763132: Epoch 221 
+2026-09-05 09:17:13.763203: Current learning rate: 0.00144 
+2026-09-05 09:18:29.074259: train_loss -0.4039 
+2026-09-05 09:18:29.074435: val_loss -0.3067 
+2026-09-05 09:18:29.074506: Pseudo dice [np.float32(0.9648), np.float32(0.8646), np.float32(0.9299), np.float32(0.907)] 
+2026-09-05 09:18:29.074572: val classification accuracy 0.75 
+2026-09-05 09:18:29.074720: val auc tensor(0.9414) 
+2026-09-05 09:18:29.075191: Epoch time: 75.31 s 
+2026-09-05 09:18:29.655887:  
+2026-09-05 09:18:29.656015: Epoch 222 
+2026-09-05 09:18:29.656091: Current learning rate: 0.00139 
+2026-09-05 09:19:44.856296: train_loss -0.3939 
+2026-09-05 09:19:44.856507: val_loss -0.3566 
+2026-09-05 09:19:44.856581: Pseudo dice [np.float32(0.9712), np.float32(0.838), np.float32(0.9398), np.float32(0.8657)] 
+2026-09-05 09:19:44.856645: val classification accuracy 0.875 
+2026-09-05 09:19:44.856798: val auc tensor(0.9844) 
+2026-09-05 09:19:44.857318: Epoch time: 75.2 s 
+2026-09-05 09:19:45.440136:  
+2026-09-05 09:19:45.440268: Epoch 223 
+2026-09-05 09:19:45.440349: Current learning rate: 0.00135 
+2026-09-05 09:20:59.966734: train_loss -0.4013 
+2026-09-05 09:20:59.966887: val_loss -0.3299 
+2026-09-05 09:20:59.966958: Pseudo dice [np.float32(0.9643), np.float32(0.8464), np.float32(0.9404), np.float32(0.9026)] 
+2026-09-05 09:20:59.967020: val classification accuracy 0.8438 
+2026-09-05 09:20:59.967168: val auc tensor(0.9688) 
+2026-09-05 09:20:59.967594: Epoch time: 74.53 s 
+2026-09-05 09:21:00.547891:  
+2026-09-05 09:21:00.548008: Epoch 224 
+2026-09-05 09:21:00.548087: Current learning rate: 0.0013 
+2026-09-05 09:22:15.373263: train_loss -0.4002 
+2026-09-05 09:22:15.373472: val_loss -0.3387 
+2026-09-05 09:22:15.373544: Pseudo dice [np.float32(0.9523), np.float32(0.8749), np.float32(0.9384), np.float32(0.8911)] 
+2026-09-05 09:22:15.373612: val classification accuracy 0.7812 
+2026-09-05 09:22:15.373771: val auc tensor(0.9766) 
+2026-09-05 09:22:15.374297: Epoch time: 74.83 s 
+2026-09-05 09:22:15.968274:  
+2026-09-05 09:22:15.968388: Epoch 225 
+2026-09-05 09:22:15.968457: Current learning rate: 0.00126 
+2026-09-05 09:23:29.983473: train_loss -0.4022 
+2026-09-05 09:23:29.983624: val_loss -0.3099 
+2026-09-05 09:23:29.983698: Pseudo dice [np.float32(0.9614), np.float32(0.8843), np.float32(0.9411), np.float32(0.8979)] 
+2026-09-05 09:23:29.983764: val classification accuracy 0.8438 
+2026-09-05 09:23:29.983905: val auc tensor(0.9160) 
+2026-09-05 09:23:29.984352: Epoch time: 74.02 s 
+2026-09-05 09:23:30.564031:  
+2026-09-05 09:23:30.564168: Epoch 226 
+2026-09-05 09:23:30.564260: Current learning rate: 0.00121 
+2026-09-05 09:24:47.372633: train_loss -0.3998 
+2026-09-05 09:24:47.372853: val_loss -0.3094 
+2026-09-05 09:24:47.372929: Pseudo dice [np.float32(0.9582), np.float32(0.89), np.float32(0.947), np.float32(0.8778)] 
+2026-09-05 09:24:47.372999: val classification accuracy 0.75 
+2026-09-05 09:24:47.373167: val auc tensor(0.8516) 
+2026-09-05 09:24:47.373676: Epoch time: 76.81 s 
+2026-09-05 09:24:47.964809:  
+2026-09-05 09:24:47.964932: Epoch 227 
+2026-09-05 09:24:47.965014: Current learning rate: 0.00117 
+2026-09-05 09:26:04.150128: train_loss -0.4022 
+2026-09-05 09:26:04.150355: val_loss -0.3294 
+2026-09-05 09:26:04.150432: Pseudo dice [np.float32(0.9616), np.float32(0.8857), np.float32(0.9391), np.float32(0.8917)] 
+2026-09-05 09:26:04.150500: val classification accuracy 0.8438 
+2026-09-05 09:26:04.150666: val auc tensor(0.9531) 
+2026-09-05 09:26:04.151221: Epoch time: 76.19 s 
+2026-09-05 09:26:04.735539:  
+2026-09-05 09:26:04.735660: Epoch 228 
+2026-09-05 09:26:04.735951: Current learning rate: 0.00112 
+2026-09-05 09:27:18.950292: train_loss -0.4039 
+2026-09-05 09:27:18.950509: val_loss -0.3461 
+2026-09-05 09:27:18.950583: Pseudo dice [np.float32(0.958), np.float32(0.8817), np.float32(0.9227), np.float32(0.887)] 
+2026-09-05 09:27:18.950647: val classification accuracy 0.8125 
+2026-09-05 09:27:18.950804: val auc tensor(0.9727) 
+2026-09-05 09:27:18.951326: Epoch time: 74.22 s 
+2026-09-05 09:27:19.533151:  
+2026-09-05 09:27:19.533296: Epoch 229 
+2026-09-05 09:27:19.533394: Current learning rate: 0.00108 
+2026-09-05 09:28:36.376566: train_loss -0.4007 
+2026-09-05 09:28:36.376779: val_loss -0.3489 
+2026-09-05 09:28:36.376853: Pseudo dice [np.float32(0.9704), np.float32(0.8802), np.float32(0.9482), np.float32(0.8735)] 
+2026-09-05 09:28:36.376917: val classification accuracy 0.875 
+2026-09-05 09:28:36.377080: val auc tensor(0.9492) 
+2026-09-05 09:28:36.377592: Epoch time: 76.84 s 
+2026-09-05 09:28:36.984086:  
+2026-09-05 09:28:36.984241: Epoch 230 
+2026-09-05 09:28:36.984323: Current learning rate: 0.00103 
+2026-09-05 09:29:52.092911: train_loss -0.4035 
+2026-09-05 09:29:52.093108: val_loss -0.3213 
+2026-09-05 09:29:52.093189: Pseudo dice [np.float32(0.9654), np.float32(0.8972), np.float32(0.9475), np.float32(0.8923)] 
+2026-09-05 09:29:52.093257: val classification accuracy 0.75 
+2026-09-05 09:29:52.093417: val auc tensor(0.8945) 
+2026-09-05 09:29:52.093922: Epoch time: 75.11 s 
+2026-09-05 09:29:52.673391:  
+2026-09-05 09:29:52.673512: Epoch 231 
+2026-09-05 09:29:52.673583: Current learning rate: 0.00098 
+2026-09-05 09:31:07.744660: train_loss -0.3996 
+2026-09-05 09:31:07.744869: val_loss -0.321 
+2026-09-05 09:31:07.744944: Pseudo dice [np.float32(0.9621), np.float32(0.8804), np.float32(0.9242), np.float32(0.892)] 
+2026-09-05 09:31:07.745011: val classification accuracy 0.9062 
+2026-09-05 09:31:07.745174: val auc tensor(0.9805) 
+2026-09-05 09:31:07.745679: Epoch time: 75.07 s 
+2026-09-05 09:31:08.779765:  
+2026-09-05 09:31:08.779877: Epoch 232 
+2026-09-05 09:31:08.779945: Current learning rate: 0.00094 
+2026-09-05 09:32:24.168782: train_loss -0.3976 
+2026-09-05 09:32:24.168973: val_loss -0.2774 
+2026-09-05 09:32:24.169055: Pseudo dice [np.float32(0.9705), np.float32(0.8285), np.float32(0.9461), np.float32(0.8308)] 
+2026-09-05 09:32:24.169122: val classification accuracy 0.7188 
+2026-09-05 09:32:24.169270: val auc tensor(0.8906) 
+2026-09-05 09:32:24.169735: Epoch time: 75.39 s 
+2026-09-05 09:32:24.755010:  
+2026-09-05 09:32:24.755143: Epoch 233 
+2026-09-05 09:32:24.755217: Current learning rate: 0.00089 
+2026-09-05 09:33:37.947283: train_loss -0.3988 
+2026-09-05 09:33:37.947500: val_loss -0.3151 
+2026-09-05 09:33:37.947575: Pseudo dice [np.float32(0.9679), np.float32(0.8534), np.float32(0.9301), np.float32(0.9012)] 
+2026-09-05 09:33:37.947644: val classification accuracy 0.7188 
+2026-09-05 09:33:37.947799: val auc tensor(0.9102) 
+2026-09-05 09:33:37.948313: Epoch time: 73.19 s 
+2026-09-05 09:33:38.536018:  
+2026-09-05 09:33:38.536147: Epoch 234 
+2026-09-05 09:33:38.536224: Current learning rate: 0.00084 
+2026-09-05 09:34:54.445922: train_loss -0.4035 
+2026-09-05 09:34:54.446087: val_loss -0.3398 
+2026-09-05 09:34:54.446162: Pseudo dice [np.float32(0.9688), np.float32(0.8657), np.float32(0.945), np.float32(0.8982)] 
+2026-09-05 09:34:54.446226: val classification accuracy 0.7812 
+2026-09-05 09:34:54.446370: val auc tensor(0.9414) 
+2026-09-05 09:34:54.446805: Epoch time: 75.91 s 
+2026-09-05 09:34:55.030051:  
+2026-09-05 09:34:55.030169: Epoch 235 
+2026-09-05 09:34:55.030247: Current learning rate: 0.00079 
+2026-09-05 09:36:10.835740: train_loss -0.398 
+2026-09-05 09:36:10.835959: val_loss -0.3051 
+2026-09-05 09:36:10.836040: Pseudo dice [np.float32(0.9673), np.float32(0.8698), np.float32(0.9287), np.float32(0.8836)] 
+2026-09-05 09:36:10.836109: val classification accuracy 0.8438 
+2026-09-05 09:36:10.836267: val auc tensor(0.8906) 
+2026-09-05 09:36:10.836771: Epoch time: 75.81 s 
+2026-09-05 09:36:11.425058:  
+2026-09-05 09:36:11.425191: Epoch 236 
+2026-09-05 09:36:11.425271: Current learning rate: 0.00075 
+2026-09-05 09:37:26.327636: train_loss -0.3973 
+2026-09-05 09:37:26.327792: val_loss -0.3193 
+2026-09-05 09:37:26.327865: Pseudo dice [np.float32(0.9615), np.float32(0.9001), np.float32(0.9328), np.float32(0.9035)] 
+2026-09-05 09:37:26.327927: val classification accuracy 0.7812 
+2026-09-05 09:37:26.328078: val auc tensor(0.9375) 
+2026-09-05 09:37:26.328519: Epoch time: 74.9 s 
+2026-09-05 09:37:26.950926:  
+2026-09-05 09:37:26.951064: Epoch 237 
+2026-09-05 09:37:26.951158: Current learning rate: 0.0007 
+2026-09-05 09:38:42.687897: train_loss -0.4013 
+2026-09-05 09:38:42.688114: val_loss -0.3094 
+2026-09-05 09:38:42.688188: Pseudo dice [np.float32(0.9655), np.float32(0.8726), np.float32(0.9391), np.float32(0.8886)] 
+2026-09-05 09:38:42.688254: val classification accuracy 0.7812 
+2026-09-05 09:38:42.688417: val auc tensor(0.9336) 
+2026-09-05 09:38:42.688934: Epoch time: 75.74 s 
+2026-09-05 09:38:43.270995:  
+2026-09-05 09:38:43.271125: Epoch 238 
+2026-09-05 09:38:43.271200: Current learning rate: 0.00065 
+2026-09-05 09:39:58.289438: train_loss -0.4009 
+2026-09-05 09:39:58.289618: val_loss -0.3378 
+2026-09-05 09:39:58.289690: Pseudo dice [np.float32(0.9699), np.float32(0.891), np.float32(0.9398), np.float32(0.8774)] 
+2026-09-05 09:39:58.289755: val classification accuracy 0.8438 
+2026-09-05 09:39:58.289902: val auc tensor(0.9609) 
+2026-09-05 09:39:58.290395: Epoch time: 75.02 s 
+2026-09-05 09:39:58.871681:  
+2026-09-05 09:39:58.871803: Epoch 239 
+2026-09-05 09:39:58.871872: Current learning rate: 0.0006 
+2026-09-05 09:41:13.891526: train_loss -0.4009 
+2026-09-05 09:41:13.891741: val_loss -0.2894 
+2026-09-05 09:41:13.891821: Pseudo dice [np.float32(0.9612), np.float32(0.8898), np.float32(0.9295), np.float32(0.8981)] 
+2026-09-05 09:41:13.891886: val classification accuracy 0.75 
+2026-09-05 09:41:13.892047: val auc tensor(0.8516) 
+2026-09-05 09:41:13.892557: Epoch time: 75.02 s 
+2026-09-05 09:41:14.483485:  
+2026-09-05 09:41:14.483619: Epoch 240 
+2026-09-05 09:41:14.483698: Current learning rate: 0.00055 
+2026-09-05 09:42:30.723656: train_loss -0.4017 
+2026-09-05 09:42:30.723855: val_loss -0.3752 
+2026-09-05 09:42:30.723928: Pseudo dice [np.float32(0.9698), np.float32(0.8803), np.float32(0.9436), np.float32(0.9071)] 
+2026-09-05 09:42:30.723993: val classification accuracy 0.9375 
+2026-09-05 09:42:30.724155: val auc tensor(0.9688) 
+2026-09-05 09:42:30.724638: Epoch time: 76.24 s 
+2026-09-05 09:42:31.310167:  
+2026-09-05 09:42:31.310304: Epoch 241 
+2026-09-05 09:42:31.310402: Current learning rate: 0.0005 
+2026-09-05 09:43:47.221989: train_loss -0.4028 
+2026-09-05 09:43:47.222210: val_loss -0.3582 
+2026-09-05 09:43:47.222289: Pseudo dice [np.float32(0.9504), np.float32(0.8988), np.float32(0.9392), np.float32(0.9057)] 
+2026-09-05 09:43:47.222359: val classification accuracy 0.7812 
+2026-09-05 09:43:47.222520: val auc tensor(0.9336) 
+2026-09-05 09:43:47.223039: Epoch time: 75.91 s 
+2026-09-05 09:43:47.810313:  
+2026-09-05 09:43:47.810444: Epoch 242 
+2026-09-05 09:43:47.810524: Current learning rate: 0.00045 
+2026-09-05 09:45:03.980977: train_loss -0.3996 
+2026-09-05 09:45:03.981171: val_loss -0.3354 
+2026-09-05 09:45:03.981245: Pseudo dice [np.float32(0.9664), np.float32(0.8779), np.float32(0.9432), np.float32(0.8866)] 
+2026-09-05 09:45:03.981311: val classification accuracy 0.8438 
+2026-09-05 09:45:03.981466: val auc tensor(0.9492) 
+2026-09-05 09:45:03.981931: Epoch time: 76.17 s 
+2026-09-05 09:45:04.573341:  
+2026-09-05 09:45:04.573468: Epoch 243 
+2026-09-05 09:45:04.573546: Current learning rate: 0.0004 
+2026-09-05 09:46:19.417825: train_loss -0.4024 
+2026-09-05 09:46:19.418047: val_loss -0.3708 
+2026-09-05 09:46:19.418122: Pseudo dice [np.float32(0.9675), np.float32(0.8464), np.float32(0.9452), np.float32(0.886)] 
+2026-09-05 09:46:19.418188: val classification accuracy 0.8125 
+2026-09-05 09:46:19.418344: val auc tensor(0.9766) 
+2026-09-05 09:46:19.418856: Epoch time: 74.85 s 
+2026-09-05 09:46:20.007275:  
+2026-09-05 09:46:20.007397: Epoch 244 
+2026-09-05 09:46:20.007468: Current learning rate: 0.00035 
+2026-09-05 09:47:36.729655: train_loss -0.3998 
+2026-09-05 09:47:36.729832: val_loss -0.3714 
+2026-09-05 09:47:36.729904: Pseudo dice [np.float32(0.9703), np.float32(0.885), np.float32(0.9487), np.float32(0.9017)] 
+2026-09-05 09:47:36.730178: val classification accuracy 0.9062 
+2026-09-05 09:47:36.730337: val auc tensor(0.9844) 
+2026-09-05 09:47:36.730802: Epoch time: 76.72 s 
+2026-09-05 09:47:37.319574:  
+2026-09-05 09:47:37.319744: Epoch 245 
+2026-09-05 09:47:37.319839: Current learning rate: 0.0003 
+2026-09-05 09:48:53.550530: train_loss -0.4051 
+2026-09-05 09:48:53.550746: val_loss -0.312 
+2026-09-05 09:48:53.550823: Pseudo dice [np.float32(0.9689), np.float32(0.8743), np.float32(0.942), np.float32(0.8893)] 
+2026-09-05 09:48:53.550890: val classification accuracy 0.75 
+2026-09-05 09:48:53.551055: val auc tensor(0.8945) 
+2026-09-05 09:48:53.551571: Epoch time: 76.23 s 
+2026-09-05 09:48:54.139203:  
+2026-09-05 09:48:54.139327: Epoch 246 
+2026-09-05 09:48:54.139410: Current learning rate: 0.00024 
+2026-09-05 09:50:10.566188: train_loss -0.4028 
+2026-09-05 09:50:10.566383: val_loss -0.3359 
+2026-09-05 09:50:10.566456: Pseudo dice [np.float32(0.9625), np.float32(0.8578), np.float32(0.937), np.float32(0.9053)] 
+2026-09-05 09:50:10.566520: val classification accuracy 0.9062 
+2026-09-05 09:50:10.566666: val auc tensor(0.9531) 
+2026-09-05 09:50:10.567143: Epoch time: 76.43 s 
+2026-09-05 09:50:11.154367:  
+2026-09-05 09:50:11.154490: Epoch 247 
+2026-09-05 09:50:11.154568: Current learning rate: 0.00019 
+2026-09-05 09:51:26.626378: train_loss -0.4024 
+2026-09-05 09:51:26.626595: val_loss -0.3746 
+2026-09-05 09:51:26.626670: Pseudo dice [np.float32(0.9703), np.float32(0.8823), np.float32(0.9407), np.float32(0.8836)] 
+2026-09-05 09:51:26.626738: val classification accuracy 0.9688 
+2026-09-05 09:51:26.626896: val auc tensor(1.) 
+2026-09-05 09:51:26.627414: Epoch time: 75.47 s 
+2026-09-05 09:51:26.627565: Yayy! New best evaluation metric: 1.9179999828338623 
+2026-09-05 09:51:26.871955: 
+Task weights: 
+2026-09-05 09:51:26.876853:    segmentation_weight  classification_weight
+0                  0.5                    0.5 
+2026-09-05 09:51:27.476955:  
+2026-09-05 09:51:27.477086: Epoch 248 
+2026-09-05 09:51:27.477172: Current learning rate: 0.00013 
+2026-09-05 09:52:41.815019: train_loss -0.4036 
+2026-09-05 09:52:41.815236: val_loss -0.3362 
+2026-09-05 09:52:41.815310: Pseudo dice [np.float32(0.9694), np.float32(0.8656), np.float32(0.9359), np.float32(0.8772)] 
+2026-09-05 09:52:41.815372: val classification accuracy 0.9375 
+2026-09-05 09:52:41.815528: val auc tensor(0.9883) 
+2026-09-05 09:52:41.816045: Epoch time: 74.34 s 
+2026-09-05 09:52:42.856746:  
+2026-09-05 09:52:42.856880: Epoch 249 
+2026-09-05 09:52:42.856957: Current learning rate: 7e-05 
+2026-09-05 09:53:57.902426: train_loss -0.4005 
+2026-09-05 09:53:57.902620: val_loss -0.362 
+2026-09-05 09:53:57.902699: Pseudo dice [np.float32(0.9635), np.float32(0.8901), np.float32(0.9426), np.float32(0.9049)] 
+2026-09-05 09:53:57.902765: val classification accuracy 0.8125 
+2026-09-05 09:53:57.902922: val auc tensor(0.9492) 
+2026-09-05 09:53:57.903410: Epoch time: 75.05 s 
+2026-09-05 09:53:58.751873: Training done. 
+2026-09-05 09:53:58.767196: Using splits from existing split file: /home/jovyan/flare/nnUNet_preprocessed/Dataset009_PHLF/splits_final.json 
+2026-09-05 09:53:58.767394: The split file contains 5 splits. 
+2026-09-05 09:53:58.767440: Desired fold for training: 0 
+2026-09-05 09:53:58.767482: This split has 127 training and 32 validation cases. 
+2026-09-05 09:53:58.767596: predicting C1_015 
+2026-09-05 09:53:58.794438: C1_015, shape torch.Size([1, 70, 310, 352]), rank 0 
